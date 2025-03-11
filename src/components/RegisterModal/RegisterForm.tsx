@@ -1,3 +1,4 @@
+import Button from "../commons/Button";
 import InputField from "../commons/InputField";
 
 const RegisterForm: React.FC = () => {
@@ -21,8 +22,8 @@ const RegisterForm: React.FC = () => {
         type="password"
         placeholder="Enter your password"
         required
-      />
-        <button type="submit" className="btn btn-primary w-100">Regístrate</button>
+      /> 
+       <Button label="Regístrate" type="submit" />
       </form>
     );
   };

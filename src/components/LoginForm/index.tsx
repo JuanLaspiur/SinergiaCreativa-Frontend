@@ -1,6 +1,7 @@
 import React from 'react';
 import useLogin from '../../hooks/useLogin';
 import InputField from '../commons/InputField';
+import Button from '../commons/Button';
 
 
 interface LoginFormProps {
@@ -33,7 +34,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit" className="btn btn-primary w-100">Login</button>
+  <Button label="Login" type="submit" />
     </form>
   );
 };
