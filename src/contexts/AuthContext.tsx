@@ -35,10 +35,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string) => {
     try {
       const response = await apiLogin(email, password);
-      setUser(response.user);
-      setToken(response.token);
-      localStorage.setItem("authToken", response.token);
-      localStorage.setItem("authUser", JSON.stringify(response.user));
+      setUser(response.data.user);
+      setToken(response.data.token);
+      localStorage.setItem("authToken", response.data.token);
+      localStorage.setItem("authUser", JSON.stringify(response.data.user));
     } catch (error) {
       console.error("Error en login:", error);
       throw error;

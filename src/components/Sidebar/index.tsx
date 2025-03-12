@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom' // Importar el hook de navegació
 import SidebarHeader from './SidebarHeader'
 import Menu from './Menu'
 
+
 const Sidebar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate() // Crear la función de navegación
 
   const toggleMenu = () => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { RegisterModalProps } from '../../interfaces/RegisterModalProps';
-
-import Modal from './Modal';
+import Modal from '../commons/Modal';
 import RegisterForm from './RegisterForm';
 
 

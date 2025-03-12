@@ -1,6 +1,7 @@
 import { $api } from './api'; 
 
 type LoginResponse = {
+  data:{
   message: string;
   user: {
     _id: string;
@@ -12,7 +13,7 @@ type LoginResponse = {
     __v: number;
   };
   token: string;
-};
+}};
 
 export const login = async (email: string, password: string): Promise<LoginResponse> => {
   try {
