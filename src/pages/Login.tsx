@@ -8,9 +8,11 @@ import Swal from "sweetalert2";
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { login } = useAuth();
 
   const handleSubmit = async (email: string, password: string) => {
+    setIsLoading(true)
     try {
       await login(email, password);
       navigate('/dashboard');
@@ -21,6 +23,8 @@ const Login: React.FC = () => {
               text: "Intentelo más tarde",
             });
       console.error('Error al iniciar sesión:', error);
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -33,7 +37,7 @@ const Login: React.FC = () => {
       <div className="card" style={{ width: '20rem' }}>
         <div className="card-body">
           <h5 className="card-title text-center mb-4">Login</h5>
-          <LoginForm onSubmit={handleSubmit} />
+          <LoginForm onSubmit={handleSubmit} isLoading={isLoading}/>
           <div className="text-center mt-3">
             <span>¿No tiene cuenta aún? <a href="#" onClick={handleModalToggle}>Regístrate</a></span>
           </div>

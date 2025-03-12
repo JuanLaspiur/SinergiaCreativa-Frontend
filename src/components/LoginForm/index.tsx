@@ -6,9 +6,10 @@ import Button from '../commons/Button';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
+  isLoading:boolean
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, isLoading }) => {
   const { email, setEmail, password, setPassword } = useLogin();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,7 +35,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-  <Button label="Login" type="submit" />
+  <Button label="Login" type="submit" isLoading={isLoading} />
     </form>
   );
 };

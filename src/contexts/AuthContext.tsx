@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { login as apiLogin } from "../services/auth";
 
-
 export interface User {
   _id: string;
   name: string;
@@ -39,8 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(response.user);
       setToken(response.token);
       localStorage.setItem("authToken", response.token);
-      localStorage.setItem("authUser", JSON.stringify(response.user)); 
-
+      localStorage.setItem("authUser", JSON.stringify(response.user));
     } catch (error) {
       console.error("Error en login:", error);
       throw error;
@@ -48,11 +46,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    const savedToken = localStorage.getItem("authToken");
-    const savedUser = localStorage.getItem("authUser");
+    try {
+      const savedToken = localStorage.getItem("authToken");
+      const savedUser = localStorage.getItem("authUser");
 
-    if (savedToken) setToken(savedToken);
-    if (savedUser) setUser(JSON.parse(savedUser));
+      if (savedToken) setToken(savedToken);
+      if (savedUser) setUser(JSON.parse(savedUser));
+    } catch (error) {
+      console.error("Error al cargar el usuario desde el almacenamiento:", error);
+      setUser(null);
+      setToken(null);
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("authUser");
+    }
   }, [setToken, setUser]);
 
   const logout = () => {
@@ -60,7 +66,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setToken(null);
     localStorage.removeItem("authToken");
     localStorage.removeItem("authUser");
-
   };
 
   return (
