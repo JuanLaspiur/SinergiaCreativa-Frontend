@@ -1,5 +1,6 @@
 import DollarCard from "../components/DollarCard"
 import Header from "../components/Header"
+import ProductTable from "../components/ProductTable"
 import Sidebar from "../components/Sidebar"
 import UserInfoCard from "../components/UserInfoCard"
 import Card from "../components/commons/Card"
@@ -21,8 +22,7 @@ function Dashboard() {
 
           </div>
           <div className="row">
-            <Card title="Card Title 4" text="Some quick example text to build on the card title and make up the bulk of the card's content." buttonText="Go somewhere" />
-            <Card title="Card Title 5" text="Some quick example text to build on the card title and make up the bulk of the card's content." buttonText="Go somewhere" />
+            <ProductTable />
           </div>
         </div>
       </div>
