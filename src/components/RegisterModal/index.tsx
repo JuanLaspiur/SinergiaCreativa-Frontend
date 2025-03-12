@@ -10,7 +10,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ show, onClose }) => {
 
   return (
     <Modal title="Registro" onClose={onClose}>
-      <RegisterForm />
+      <RegisterForm  onClose={onClose}/>
     </Modal>
   );
 };

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import LoginForm from '../components/LoginForm';
 import RegisterModal from '../components/RegisterModal';
+import Swal from "sweetalert2";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -11,10 +12,14 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (email: string, password: string) => {
     try {
-      //await login(email, password);
-      console.log('Login exitoso');
+      await login(email, password);
       navigate('/dashboard');
     } catch (error) {
+           Swal.fire({
+              icon: "error",
+              title: "¡Error al iniciar sesión!",
+              text: "Intentelo más tarde",
+            });
       console.error('Error al iniciar sesión:', error);
     }
   };

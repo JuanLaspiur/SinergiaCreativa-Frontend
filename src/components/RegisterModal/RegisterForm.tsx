@@ -1,36 +1,61 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import Button from "../commons/Button";
 import InputField from "../commons/InputField";
 import { register } from "../../services/auth";
+interface registerFormProps {
+  onClose: () => void;
+}
 
-const RegisterForm: React.FC = () => {
+const RegisterForm = ({onClose}:registerFormProps) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-
     if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden");
+      Swal.fire({
+        icon: "error",
+        title: "¡Error!",
+        text: "Las contraseñas no coinciden.",
+      });
       return;
     }
 
     try {
-      // Llamada a la función register
       await register(name, email, password);
-      alert("¡Registro exitoso!");
-    } catch  {
-      setError("Error al registrar. Por favor, intenta de nuevo.");
+      Swal.fire({
+        icon: "success",
+        title: "¡Registro exitoso!",
+        text: "Te has registrado correctamente.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      clearFilds()
+      setTimeout(() => {
+        onClose();
+      }, 2000);
+    } catch {
+      Swal.fire({
+        icon: "error",
+        title: "¡Error!",
+        text: "Error al registrar. Por favor, intenta de nuevo.",
+      });
     }
   };
 
+  const clearFilds = ()=>{
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("")  
+  }
+
   return (
     <form onSubmit={handleSubmit}>
-      {error && <p style={{ color: "red" }}>{error}</p>}
       <InputField
         id="registerName"
         label="Nombre"
