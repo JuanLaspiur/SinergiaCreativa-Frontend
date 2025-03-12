@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
         {isOpen && <Menu options={menuOptions} />}
       </div>
 
-      <div className="col-md-3 bg-dark h-[100vh] text-white px-4 py-5 d-none d-md-block" style={{ zIndex: 9999999 }}>
+      <div className="col-md-3 bg-dark min-vh-100 text-white px-4 py-5 d-none d-md-block" style={{ zIndex: 9999999 }}>
         <SidebarHeader toggleMenu={toggleMenu} />
         {/* Menú para pantallas grandes */}
         <Menu options={menuOptions} />

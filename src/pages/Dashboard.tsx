@@ -4,11 +4,9 @@ import Card from "../components/Card"
 
 function Dashboard() {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid min-vh-100">
       <div className="row">
-        {/* Barra lateral */}
         <Sidebar />
-
         <div className="col-md-9">
           <Header />
           <div className="row pt-6 mt-6">
