@@ -2,65 +2,73 @@ import { useEffect, useState } from "react";
 import { getAllProducts } from "../services/product";
 
 function ProductTable() {
-  const [productos, setProductos] = useState([]);
-  const [productosFiltrados, setProductosFiltrados] = useState([]);
-  const [orden, setOrden] = useState({ precio: "asc", stock: "asc" });
-  const [textoFiltro, setTextoFiltro] = useState("");
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [sortOrder, setSortOrder] = useState({ price: "asc", stock: "asc" });
+  const [filterText, setFilterText] = useState("");
 
   useEffect(() => {
-    const obtenerProductos = async () => {
+    const fetchProducts = async () => {
       try {
         const data = await getAllProducts();
-        setProductos(data);
-        setProductosFiltrados(data); // Inicializa los productos filtrados
+        setProducts(data);
+        console.log('Numero '+JSON.stringify(data[0].commissions[0].number))
+        console.log('Porcentaje '+JSON.stringify(data[0].commissions[0].percentage))
+        setFilteredProducts(data); 
       } catch (error) {
-        console.error("Error al obtener los productos:", error);
+        console.error("Error while fetching products:", error);
       }
     };
 
-    obtenerProductos();
+    fetchProducts();
   }, []);
 
-  // Filtrar productos por nombre
+  // Filter products by name
   useEffect(() => {
-    const filtrados = productos.filter((producto) =>
-      producto.title.toLowerCase().includes(textoFiltro.toLowerCase())
+    const filtered = products.filter((product) =>
+      product.title.toLowerCase().includes(filterText.toLowerCase())
     );
-    setProductosFiltrados(filtrados);
-  }, [textoFiltro, productos]);
+    setFilteredProducts(filtered);
+  }, [filterText, products]);
 
-  // Ordenar productos por precio o stock
-  const manejarOrden = (columna) => {
-    const nuevoOrden = orden[columna] === "asc" ? "desc" : "asc";
-    setOrden({ ...orden, [columna]: nuevoOrden });
+  const handleSort = (column) => {
+    const newSortOrder = sortOrder[column] === "asc" ? "desc" : "asc";
 
-    const productosOrdenados = [...productosFiltrados].sort((a, b) => {
-      if (nuevoOrden === "asc") {
-        return a[columna] < b[columna] ? -1 : 1;
+    setSortOrder((prevOrder) => {
+      const newOrder = { ...prevOrder, [column]: newSortOrder };
+      if (column === "price") {
+        newOrder.stock = "asc"; 
+      } else if (column === "stock") {
+        newOrder.price = "asc"; 
+      }
+      return newOrder;
+    });
+
+    const sortedProducts = [...filteredProducts].sort((a, b) => {
+      if (newSortOrder === "asc") {
+        return a[column] < b[column] ? -1 : 1;
       } else {
-        return a[columna] > b[columna] ? -1 : 1;
+        return a[column] > b[column] ? -1 : 1;
       }
     });
 
-    setProductosFiltrados(productosOrdenados);
+    setFilteredProducts(sortedProducts);
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container my-5">
       <h2 className="mb-4">Tabla de Productos</h2>
 
-      {/* Filtro por nombre */}
       <div className="mb-3">
         <input
           type="text"
           className="form-control"
           placeholder="Filtrar por nombre del producto"
-          value={textoFiltro}
-          onChange={(e) => setTextoFiltro(e.target.value)}
+          value={filterText}
+          onChange={(e) => setFilterText(e.target.value)}
         />
       </div>
 
-      {/* Tabla de productos */}
       <table className="table table-striped table-bordered">
         <thead className="thead-dark">
           <tr>
@@ -68,33 +76,33 @@ function ProductTable() {
             <th scope="col">
               <button
                 className="btn btn-link"
-                onClick={() => manejarOrden("precio")}
+                onClick={() => handleSort("price")}
               >
-                Precio {orden.precio === "asc" ? "↑" : "↓"}
+                Precio {sortOrder.price === "asc" ? "↑" : "↓"}
               </button>
             </th>
             <th scope="col">
               <button
                 className="btn btn-link"
-                onClick={() => manejarOrden("stock")}
+                onClick={() => handleSort("stock")}
               >
-                Stock {orden.stock === "asc" ? "↑" : "↓"}
+                Stock {sortOrder.stock === "asc" ? "↑" : "↓"}
               </button>
             </th>
             <th scope="col">Imagen</th>
           </tr>
         </thead>
         <tbody>
-          {productosFiltrados.length > 0 ? (
-            productosFiltrados.map((producto) => (
-              <tr key={producto._id}>
-                <td>{producto.title}</td>
-                <td>${producto.price}</td>
-                <td>{producto.stock}</td>
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <tr key={product._id}>
+                <td>{product.title}</td>
+                <td>${product.price}</td>
+                <td>{product.stock}</td>
                 <td>
                   <img
-                    src={producto.image}
-                    alt={producto.title}
+                    src={product.image}
+                    alt={product.title}
                     className="img-fluid"
                     style={{ width: "50px", height: "50px" }}
                   />
@@ -115,3 +123,4 @@ function ProductTable() {
 }
 
 export default ProductTable;
+

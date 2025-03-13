@@ -14,13 +14,11 @@ const DollarCard: React.FC = () => {
     setError(null);
 
     try {
-      // Reemplaza 'YOUR_API_KEY' con tu API Key obtenida
       const response = await fetch('https://v6.exchangerate-api.com/v6/eccdf8dbe7556ae434389f5f/latest/USD');
       const data = await response.json();
       if (data.result === 'success') {
         setExchangeRate(data.conversion_rates.ARS); // Aquí se obtiene el valor en ARS
 
-        // Obtener la hora local para la actualización
         const localDate = new Date().toLocaleString();
         setUpdatedAt(localDate); // Se utiliza la hora local del navegador
       } else {

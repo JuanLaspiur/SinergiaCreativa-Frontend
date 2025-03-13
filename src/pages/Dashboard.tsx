@@ -1,25 +1,30 @@
-import DollarCard from "../components/DollarCard"
-import Header from "../components/Header"
-import ProductTable from "../components/ProductTable"
-import Sidebar from "../components/Sidebar"
-import UserInfoCard from "../components/UserInfoCard"
-import Card from "../components/commons/Card"
-import { useAuth } from "../contexts/AuthContext"
+import { useState } from "react";
+import DollarCard from "../components/DollarCard";
+import Header from "../components/Header";
+import ProductTable from "../components/ProductTable";
+import SaleModal from "../components/SaleModal";
+import Sidebar from "../components/Sidebar";
+import UserInfoCard from "../components/UserInfoCard";
+import { useAuth } from "../contexts/AuthContext";
 
 function Dashboard() {
-  const {user} = useAuth()
-  return (
+  const { user } = useAuth();
+  const [isSaleCardOpen, setIsSaleCardOpen] = useState(false); 
+  const handleNewSaleClick = () => {
+    setIsSaleCardOpen(!isSaleCardOpen);
+  };
+return(
     <div className="container-fluid min-vh-100">
       <div className="row">
         <Sidebar />
         <div className="col-md-9">
-          <Header/>
-          <div className="row pt-6 mt-6">  
-            <UserInfoCard userName={user?.name}/>  
+          <Header
+            onClick={handleNewSaleClick}
+          />
+          <div className="row pt-6 mt-6">
+            <UserInfoCard userName={user?.name} />
             <DollarCard />
-            <Card title="Card Title 1" text="Some quick example text to build on the card title and make up the bulk of the card's content." buttonText="Go somewhere" />
-        
-
+            <SaleModal onClick={handleNewSaleClick} show={isSaleCardOpen}/>
           </div>
           <div className="row">
             <ProductTable />
@@ -27,7 +32,8 @@ function Dashboard() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
+
