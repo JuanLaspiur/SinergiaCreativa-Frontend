@@ -8,7 +8,6 @@ const DollarCard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState<string>('');
 
-  // Función para obtener la tasa de cambio
   const fetchExchangeRate = async () => {
     setLoading(true);
     setError(null);

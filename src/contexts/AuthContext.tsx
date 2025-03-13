@@ -1,21 +1,15 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { login as apiLogin } from "../services/auth";
+import { IUser } from "../interfaces/User";
 
-export interface User {
-  _id: string;
-  name: string;
-  email: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
 interface AuthContextType {
-  user: User | null;
+  user: IUser | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   setToken: (token: string | null) => void;
-  setUser: (user: User | null) => void;
+  setUser: (user: IUser | null) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -29,7 +23,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
   const login = async (email: string, password: string) => {

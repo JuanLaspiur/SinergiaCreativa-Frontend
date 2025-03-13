@@ -4,7 +4,7 @@ import Card from './commons/Card';
 interface UserData {
   name: string;
   netIncome: number;
-  netMonthlyIncome: number; // Nueva propiedad para la ganancia neta mensual
+  netMonthlyIncome: number; 
 }
 
 interface UserInfoCardProps {
@@ -18,12 +18,12 @@ const UserInfoCard = ({ userName }: UserInfoCardProps) => {
   const fetchUserData = async () => {
     setUserData({
       name: userName ? userName : '',
-      netIncome: 5000, // Ganancia neta diaria (o del día)
-      netMonthlyIncome: 150000, // Ganancia neta mensual harcodeada
+      netIncome: 5000, 
+      netMonthlyIncome: 150000,
     });
 
     const month = new Date().toLocaleString('default', { month: 'long' });
-    setCurrentMonth(month.charAt(0).toUpperCase() + month.slice(1)); // Solo la primera letra en mayúscula
+    setCurrentMonth(month.charAt(0).toUpperCase() + month.slice(1)); 
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const UserInfoCard = ({ userName }: UserInfoCardProps) => {
           <>
             <p><strong>Mes:</strong> {currentMonth}</p>
             <p><strong>Ganancia neta de hoy:</strong> ${userData.netIncome?.toFixed(2)}</p>
-            <p><strong>Ganancia neta mensual:</strong> ${userData.netMonthlyIncome?.toFixed(2)}</p> {/* Muestra la ganancia mensual */}
+            <p><strong>Ganancia neta mensual:</strong> ${userData.netMonthlyIncome?.toFixed(2)}</p> 
           </>
         ) : (
           <p>Cargando datos del usuario...</p>
