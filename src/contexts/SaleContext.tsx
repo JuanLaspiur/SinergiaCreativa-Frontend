@@ -63,7 +63,6 @@ export const SalesProvider = ({ children }: { children: ReactNode }) => {
   const addSale = async (saleData: ISale) => {
     try {
       await createSale(saleData);
-      await fetchAllSales();
     } catch  {
       setError('Failed to create sale');
     }

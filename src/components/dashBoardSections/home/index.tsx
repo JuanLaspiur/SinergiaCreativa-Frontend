@@ -6,6 +6,7 @@ import SaleModal from './SaleModal';
 import UserInfoCard from './UserInfoCard';
 import { ISale } from '../../../interfaces/Sale';
 import Tab from '../../commons/Tab';  
+import SalesTable from '../../SalesTable';
 
 interface HomeProps {
   dailySales: ISale[];
@@ -29,10 +30,10 @@ function Home({ dailySales, monthlySales, userName }: HomeProps) {
       ),
     },
     {
-      title: "Hardcode",
+      title: "Ventas",
       component: (
         <div className="row">
-          <p>Hardcode</p>
+          <SalesTable/>
         </div>
       ),
     },

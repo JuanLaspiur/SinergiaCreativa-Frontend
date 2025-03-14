@@ -33,7 +33,7 @@ const UserInfoCard = ({ userName, dailySales, monthlySales }: UserInfoCardProps)
 
   useEffect(() => {
     fetchUserData();
-  }, [dailySales, userName]);
+  }, [dailySales, userName, monthlySales]);
 
   return (
     <Card title="Información del Usuario" text={`Bienvenido, ${userData?.name}`}>

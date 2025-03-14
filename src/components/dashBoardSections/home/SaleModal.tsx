@@ -1,10 +1,9 @@
 import { useState, useMemo } from 'react';
 import Modal from '../../commons/Modal';
 import Swal from 'sweetalert2';
-import { ISale } from '../../../interfaces/Sale';
-import { createSale } from '../../../services/sale';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useProducts } from '../../../hooks/useProducts';
+import { useSales } from '../../../contexts/SaleContext'; 
 
 interface SaleModalProps {
   onClick?: () => void;
@@ -14,11 +13,12 @@ interface SaleModalProps {
 function SaleModal({ onClick, show }: SaleModalProps) {
   const { user } = useAuth();
   const { products } = useProducts();
+  const { addSale } = useSales(); 
   const [selectedProductId, setSelectedProductId] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(1);
 
   const selectedProduct = useMemo(
-    () => products.find(product => product._id === selectedProductId),
+    () => products.find((product) => product._id === selectedProductId),
     [selectedProductId, products]
   );
 
@@ -28,14 +28,13 @@ function SaleModal({ onClick, show }: SaleModalProps) {
     Swal.fire({ icon, title, text });
   };
 
-  // Manejo de la venta
   const handleSale = async () => {
     if (!selectedProductId || quantity <= 0 || !selectedProduct) {
       showMessage('error', '¡Error!', 'Todos los campos deben estar completos y válidos.');
       return;
     }
 
-    const newSale: ISale = {
+    const newSale = {
       product: selectedProductId,
       userId: user?._id || '',
       total: quantity * selectedProduct.price,
@@ -43,14 +42,14 @@ function SaleModal({ onClick, show }: SaleModalProps) {
     };
 
     try {
-      await createSale(newSale);
+      await addSale(newSale); // Usa la función addSale del contexto
+
       showMessage(
         'success',
         '¡Venta realizada!',
         `Producto: ${selectedProduct.title}\nCantidad: ${quantity}\nTotal: $${quantity * selectedProduct.price}`
       );
 
-      // Reiniciar el formulario después de la venta
       setSelectedProductId('');
       setQuantity(1);
 
@@ -109,4 +108,3 @@ function SaleModal({ onClick, show }: SaleModalProps) {
 }
 
 export default SaleModal;
-

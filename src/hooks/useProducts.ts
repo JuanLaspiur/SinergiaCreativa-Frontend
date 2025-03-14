@@ -9,7 +9,7 @@ interface Product {
   image: string;
 }
 
-interface SortOrder {
+export interface ISortOrder {
   price: "asc" | "desc";
   stock: "asc" | "desc";
 }
@@ -19,7 +19,7 @@ type SortableColumns = "price" | "stock";
 export const useProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [sortOrder, setSortOrder] = useState<SortOrder>({ price: "asc", stock: "asc" });
+  const [sortOrder, setSortOrder] = useState<ISortOrder>({ price: "asc", stock: "asc" });
 
   useEffect(() => {
     const fetchProducts = async () => {

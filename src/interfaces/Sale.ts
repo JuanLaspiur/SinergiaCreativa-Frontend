@@ -1,5 +1,7 @@
+import { IProduct } from "./Product";
+
 export interface ISale {
-    product: string; 
+    product: IProduct; 
     userId: string;   
     total: number;   
     date: string;    
