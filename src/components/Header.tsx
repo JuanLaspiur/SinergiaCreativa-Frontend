@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { IconContext } from "react-icons"; // Si usas react-icons o puedes usar cualquier ícono de Bootstrap
 
 interface HeaderProps {
   title: string;
@@ -16,7 +15,7 @@ const Header: FC<HeaderProps> = ({ title, onClick, icon }) => {
             {icon}
           </div>
         )}
-        <h1 className="mb-0">{title}</h1> {/* mb-0 para eliminar margen inferior */}
+        <h1 className="mb-0">{title}</h1> 
       </div>
       {onClick && (
         <button className="btn btn-primary" onClick={onClick}>
