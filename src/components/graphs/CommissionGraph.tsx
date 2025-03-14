@@ -11,17 +11,17 @@ const CommissionGraph = () => {
       {
         label: 'Vendedor A',
         data: [500, 600, 550, 700],
-        backgroundColor: 'rgba(54, 162, 235, 0.6)', // Azul claro
+        backgroundColor: 'rgba(54, 162, 235, 0.6)', 
       },
       {
         label: 'Vendedor B',
         data: [700, 800, 750, 900],
-        backgroundColor: 'rgba(255, 99, 132, 0.6)', // Rojo
+        backgroundColor: 'rgba(255, 99, 132, 0.6)', 
       },
       {
         label: 'Vendedor C',
         data: [450, 550, 600, 650],
-        backgroundColor: 'rgba(75, 192, 192, 0.6)', // Verde claro
+        backgroundColor: 'rgba(75, 192, 192, 0.6)', 
       },
     ],
   };
@@ -39,14 +39,13 @@ const CommissionGraph = () => {
     },
     scales: {
       y: {
-        beginAtZero: true, // Asegura que el eje Y comienza en 0
+        beginAtZero: true, 
       },
     },
   };
 
   useEffect(() => {
     return () => {
-      // Limpiar cualquier gráfico creado previamente
       if (window.Chart && window.Chart.instances) {
         window.Chart.instances.forEach(instance => {
           instance.destroy();

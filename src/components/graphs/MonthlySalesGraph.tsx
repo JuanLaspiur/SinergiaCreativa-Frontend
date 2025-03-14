@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -11,17 +11,17 @@ const MonthlySalesGraph = () => {
       {
         label: 'Ventas',
         data: [1200, 1400, 1300, 1600],
-        borderColor: 'rgba(0, 123, 255, 0.6)', // Azul Bootstrap
+        borderColor: 'rgba(0, 123, 255, 0.6)', 
         backgroundColor: 'rgba(0, 123, 255, 0.2)',
         fill: true,
       },
       {
-        label: 'Expectativa Mensual', // Nueva línea para la expectativa mensual
-        data: [1500, 1500, 1500, 1500], // Valores de expectativa mensual
-        borderColor: 'rgba(255, 193, 7, 0.8)', // Amarillo
-        backgroundColor: 'rgba(255, 193, 7, 0.2)', // Amarillo semitransparente
-        borderDash: [5, 5], // Línea punteada
-        fill: false, // No llenar el área debajo de la línea
+        label: 'Expectativa Mensual', 
+        data: [1500, 1500, 1500, 1500], 
+        borderColor: 'rgba(255, 193, 7, 0.8)', 
+        backgroundColor: 'rgba(255, 193, 7, 0.2)', 
+        borderDash: [5, 5],
+        fill: false, 
       },
     ],
   };

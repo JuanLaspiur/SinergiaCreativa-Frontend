@@ -10,11 +10,11 @@ const NetIncomeGraph = () => {
     datasets: [
       {
         label: 'Ganancia Neta',
-        data: [1200, 1500, 1400, 1800, 2100, 2200], // Datos de ganancias netas
-        borderColor: 'rgba(40, 167, 69, 1)', // Verde Bootstrap
-        backgroundColor: 'rgba(40, 167, 69, 0.2)', // Verde semitransparente
-        fill: true, // Llenar el área debajo de la línea
-        tension: 0.4, // Curvatura de la línea
+        data: [1200, 1500, 1400, 1800, 2100, 2200], 
+        borderColor: 'rgba(40, 167, 69, 1)',
+        backgroundColor: 'rgba(40, 167, 69, 0.2)', 
+        fill: true, 
+        tension: 0.4, 
       },
     ],
   };
@@ -32,7 +32,7 @@ const NetIncomeGraph = () => {
     },
     scales: {
       y: {
-        beginAtZero: true, // Asegurarse de que el eje Y empiece desde cero
+        beginAtZero: true, 
       },
     },
   };

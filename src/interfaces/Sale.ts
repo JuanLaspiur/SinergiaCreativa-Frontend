@@ -4,3 +4,8 @@ export interface ISale {
     total: number;   
     date: string;    
   }
+  export interface ApiResponse<T> {
+    success: boolean;
+    message: string;
+    data: T[];
+  }

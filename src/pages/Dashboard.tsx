@@ -8,11 +8,9 @@ import Sidebar from "../components/Sidebar";
 import UserInfoCard from "../components/UserInfoCard";
 import { useAuth } from "../contexts/AuthContext";
 import SalesPlanningCard from "../components/SalesPlanningCard";
-import SalesGraphTable from "../components/SalesGraphTable";
 import ScrollToTopButton from "../components/ScrollToTopButton"; 
-import MonthlySalesGraph from "../components/MonthlySalesGraph";
-import NetIncomeGraph from "../components/NetIncomeGraph";
-import CommissionGraph from "../components/CommissionGraph";
+import {SalesGraphTable,MonthlySalesGraph, NetIncomeGraph, CommissionGraph } from "../components/graphs/export"
+
 
 function Dashboard() {
   const { user, logout } = useAuth();
