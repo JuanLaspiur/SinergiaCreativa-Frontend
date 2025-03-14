@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'; 
-import Card from '../../commons/Card';
+import {Card} from '../../commons/export';
 import { ISale } from '../../../interfaces/Sale';
 
 interface UserData {

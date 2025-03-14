@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Header from '../../Header'
+import Header from '../../commons/Header'
 import ProductTable from '../../ProductTable'
 import DollarCard from './DollarCard'
 import SaleModal from './SaleModal'

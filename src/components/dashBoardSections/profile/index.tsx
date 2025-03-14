@@ -1,11 +1,9 @@
 import { ISale } from "../../../interfaces/Sale"
-import Header from "../../Header"
-import CommissionGraph from "./graphs/CommissionGraph"
-import MonthlySalesGraph from "./graphs/MonthlySalesGraph"
-import NetIncomeGraph from "./graphs/NetIncomeGraph"
-import SalesGraphTable from "./graphs/SalesGraphTable"
+import {Header} from "../../commons/export"
+import {CommissionGraph, MonthlySalesGraph, NetIncomeGraph, SalesGraphTable} from "./graphs/export"
 import SalesPlanningCard from "./SalesPlanningCard"
 import UserInfoCard from "./UserInfoCard"
+
 interface ProfileProps {
     dailySales: ISale[],
     monthlySales: ISale[],

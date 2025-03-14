@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import Button from "../commons/Button";
-import InputField from "../commons/InputField";
+import {InputField, Button} from "../commons/export";
 import { register } from "../../services/auth";
 interface registerFormProps {
   onClose: () => void;

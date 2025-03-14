@@ -1,7 +1,6 @@
 import React from 'react';
-import useLogin from '../../hooks/useLogin';
-import InputField from '../commons/InputField';
-import Button from '../commons/Button';
+import useLogin from '../hooks/useLogin';
+import {Button, InputField} from './commons/export';
 
 
 interface LoginFormProps {
