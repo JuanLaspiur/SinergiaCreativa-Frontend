@@ -31,7 +31,6 @@ function SaleModal({ onClick, show }: SaleModalProps) {
       return;
     }
 
-    // Crear el objeto de venta
     const newSale: ISale = {
       product: selectedProductId, 
       userId: user?._id || '',  
