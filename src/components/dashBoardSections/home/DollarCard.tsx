@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Card from './commons/Card'; // Asegúrate de que la ruta sea correcta
-import { FaSyncAlt } from 'react-icons/fa'; // Usaremos un ícono de actualización
+import Card from '../../commons/Card'; 
+import { FaSyncAlt } from 'react-icons/fa'; 
 
 const DollarCard: React.FC = () => {
   const [exchangeRate, setExchangeRate] = useState<number | null>(null);
@@ -23,7 +23,7 @@ const DollarCard: React.FC = () => {
       } else {
         setError('No se pudo obtener la tasa de cambio.');
       }
-    } catch (err) {
+    } catch {
       setError('Error al conectar con el servicio de tasas de cambio.');
     } finally {
       setLoading(false);

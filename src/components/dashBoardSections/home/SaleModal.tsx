@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react';
-import Modal from './commons/Modal';
+import Modal from '../../commons/Modal';
 import Swal from 'sweetalert2';
-import { ISale } from '../interfaces/Sale';
-import { createSale } from '../services/sale';
-import { useAuth } from '../contexts/AuthContext';
-import { useProducts } from '../hooks/useProducts';
+import { ISale } from '../../../interfaces/Sale';
+import { createSale } from '../../../services/sale';
+import { useAuth } from '../../../contexts/AuthContext';
+import { useProducts } from '../../../hooks/useProducts';
 
 interface SaleModalProps {
   onClick?: () => void;

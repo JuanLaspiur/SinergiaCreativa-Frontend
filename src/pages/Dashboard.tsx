@@ -1,25 +1,15 @@
 import { useState, useEffect } from "react";
-import DollarCard from "../components/DollarCard";
-import Header from "../components/Header";
-import ProductTable from "../components/ProductTable";
-import SaleModal from "../components/SaleModal";
-import Sidebar from "../components/Sidebar";
-import UserInfoCard from "../components/UserInfoCard";
 import { useAuth } from "../contexts/AuthContext";
-import SalesPlanningCard from "../components/SalesPlanningCard";
-import ScrollToTopButton from "../components/ScrollToTopButton"; 
-import {SalesGraphTable,MonthlySalesGraph, NetIncomeGraph, CommissionGraph } from "../components/graphs/export"
-
-
+import { useSales } from "../contexts/SaleContext";
+import { Home, Profile, Settings } from "../components/dashBoardSections/export";
+import ScrollToTopButton from "../components/ScrollToTopButton";
+import Sidebar from "../components/Sidebar";
 function Dashboard() {
   const { user, logout } = useAuth();
-  const [isSaleCardOpen, setIsSaleCardOpen] = useState(false); 
+  const {dailySales, monthlySales} = useSales();
   const [selectedMenu, setSelectedMenu] = useState<string>('Home'); 
   const [showScrollButton, setShowScrollButton] = useState(false); 
 
-  const handleNewSaleClick = () => {
-    setIsSaleCardOpen(!isSaleCardOpen);
-  };
 
 
   useEffect(() => {
@@ -43,51 +33,15 @@ function Dashboard() {
       <div className="row">
         <Sidebar selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} logout={logout} /> 
         {(selectedMenu === 'Home' || selectedMenu === 'Logout') && (
-          <div className="col-md-9">
-            <Header title="Bienvenido a tu Dashboard" onClick={handleNewSaleClick}  />
-            <div className="row pt-6 mt-6">
-              <UserInfoCard userName={user?.name} />
-              <DollarCard />
-              <SaleModal onClick={handleNewSaleClick} show={isSaleCardOpen} />
-            </div>
-            <div className="row">
-              <ProductTable />
-            </div>
-          </div>
+          <Home dailySales={dailySales}  monthlySales={monthlySales} userName={user?.name}/>
         )}
-        {selectedMenu === 'Settings' && (
-          <div className="col-md-9">
-            <Header title="Settings"/>
-            <div className="row pt-6 mt-6">
-            </div>
-          </div>
+        {selectedMenu === 'Profile' && (
+         <Profile dailySales={dailySales}  monthlySales={monthlySales} userName={user?.name}/>
+        )}    
+         {selectedMenu === 'Settings' && (
+          <Settings/>
         )}
 
-        {selectedMenu === 'Profile' && (
-          <div className="col-md-9">
-            <Header title="Profile"  />
-            <div className="row pt-6 mt-6">
-              <UserInfoCard userName={user?.name} />
-              <SalesPlanningCard />
-            </div>
-            <div className="row pt-6 mt-6">
-              <div className="col-md-6">
-                <SalesGraphTable />
-              </div>
-              <div className="col-md-6">
-              <MonthlySalesGraph/>
-              </div>
-            </div>
-            <div className="row pt-6 mt-6">
-            <div className="col-md-6">
-            <NetIncomeGraph/>
-            </div>
-            <div className="col-md-6">
-            <CommissionGraph/>
-            </div>
-            </div>
-          </div>
-        )}
       </div>
 
       <ScrollToTopButton showScrollButton={showScrollButton} />

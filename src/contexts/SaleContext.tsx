@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useAuth } from './AuthContext';
 import { createSale, getAllSales, getDailySales, getMonthlySales, getSalesByUserId } from '../services/sale';
 import {ISale, SalesContextType} from '../interfaces/Sale' 
 
@@ -20,8 +21,8 @@ export const SalesProvider = ({ children }: { children: ReactNode }) => {
   const [userSales, setUserSales] = useState<ISale[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const authUser = JSON.parse(localStorage.getItem('authUser') || '{}');
-  const userId = authUser._id;
+  const { user } = useAuth()
+  const userId = user?._id as string;
 
   const fetchAllSales = async () => {
     try {
@@ -75,7 +76,7 @@ export const SalesProvider = ({ children }: { children: ReactNode }) => {
       fetchMonthlySales();
       fetchUserSales();
     }
-  }, [userId]); 
+  }, [userId, user?._id]); 
 
   return (
     <SalesContext.Provider
