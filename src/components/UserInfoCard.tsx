@@ -37,7 +37,8 @@ const UserInfoCard = ({ userName }: UserInfoCardProps) => {
           <>
             <p><strong>Mes:</strong> {currentMonth}</p>
             <p><strong>Ganancia neta de hoy:</strong> ${userData.netIncome?.toFixed(2)}</p>
-            <p><strong>Ganancia neta mensual:</strong> ${userData.netMonthlyIncome?.toFixed(2)}</p> 
+            <p><strong>Ganancia neta mensual:</strong> ${userData.netMonthlyIncome?.toFixed(2)}</p>
+            <p><strong>Ganancia neta de hoy:</strong> ${userData.netIncome?.toFixed(2)}</p>
           </>
         ) : (
           <p>Cargando datos del usuario...</p>

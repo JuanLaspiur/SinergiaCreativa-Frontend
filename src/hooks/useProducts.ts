@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { getAllProducts } from "../services/product";
 
 interface Product {
@@ -35,6 +35,18 @@ export const useProducts = () => {
     fetchProducts();
   }, []);
 
+  const sortedProducts = useMemo(() => {
+    return [...filteredProducts].sort((a, b) => {
+      const column = sortOrder.price === "asc" ? "price" : "stock";
+      const order = sortOrder[column];
+      if (order === "asc") {
+        return a[column] < b[column] ? -1 : 1;
+      } else {
+        return a[column] > b[column] ? -1 : 1;
+      }
+    });
+  }, [filteredProducts, sortOrder]);
+
   const handleSort = (column: SortableColumns) => {
     const newSortOrder = sortOrder[column] === "asc" ? "desc" : "asc";
 
@@ -46,14 +58,6 @@ export const useProducts = () => {
         newOrder.price = "asc";
       }
       return newOrder;
-    });
-
-    const sortedProducts = [...filteredProducts].sort((a, b) => {
-      if (newSortOrder === "asc") {
-        return a[column] < b[column] ? -1 : 1;
-      } else {
-        return a[column] > b[column] ? -1 : 1;
-      }
     });
 
     setFilteredProducts(sortedProducts);

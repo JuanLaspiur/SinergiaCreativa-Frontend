@@ -16,6 +16,9 @@ const SalesPlanningCard: React.FC = () => {
         <p>
           <strong>Ganancias Actuales Netas:</strong> ${profit.toFixed(2)}
         </p>
+        <p><strong>Ganancia neta de hoy:</strong>458648</p>
+        <p><strong>Ganancia neta mensual:</strong>77575</p>
+        <p><strong>Ganancia neta mensual:</strong>77575</p>
       </div>
       <button className="btn btn-primary" onClick={handleEditPlanning}>
         Editar Planificación de Ganancias
