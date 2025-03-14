@@ -9,3 +9,16 @@ export interface ISale {
     message: string;
     data: T[];
   }
+
+  export interface SalesContextType {
+    sales: ISale[];
+    dailySales: ISale[];
+    monthlySales: ISale[];
+    userSales: ISale[];
+    error: string | null;
+    addSale: (saleData: ISale) => Promise<void>;
+    fetchAllSales: () => Promise<void>;
+    fetchDailySales: () => Promise<void>;
+    fetchMonthlySales: () => Promise<void>;
+    fetchUserSales: () => Promise<void>;
+  }

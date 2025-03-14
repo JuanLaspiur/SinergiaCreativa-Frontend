@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { FaHome, FaCogs, FaUser } from 'react-icons/fa'; 
 import DollarCard from "../components/DollarCard";
 import Header from "../components/Header";
 import ProductTable from "../components/ProductTable";
@@ -22,18 +21,6 @@ function Dashboard() {
     setIsSaleCardOpen(!isSaleCardOpen);
   };
 
-  const getIconForTitle = (title: string) => {
-    switch (title) {
-      case 'Home':
-        return <FaHome />;
-      case 'Settings':
-        return <FaCogs />;
-      case 'Profile':
-        return <FaUser />;
-      default:
-        return null;
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,7 +44,7 @@ function Dashboard() {
         <Sidebar selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} logout={logout} /> 
         {(selectedMenu === 'Home' || selectedMenu === 'Logout') && (
           <div className="col-md-9">
-            <Header title="Bienvenido a tu Dashboard" onClick={handleNewSaleClick} icon={getIconForTitle('Home')} />
+            <Header title="Bienvenido a tu Dashboard" onClick={handleNewSaleClick}  />
             <div className="row pt-6 mt-6">
               <UserInfoCard userName={user?.name} />
               <DollarCard />
@@ -70,7 +57,7 @@ function Dashboard() {
         )}
         {selectedMenu === 'Settings' && (
           <div className="col-md-9">
-            <Header title="Settings" icon={getIconForTitle('Settings')} />
+            <Header title="Settings"/>
             <div className="row pt-6 mt-6">
             </div>
           </div>
@@ -78,7 +65,7 @@ function Dashboard() {
 
         {selectedMenu === 'Profile' && (
           <div className="col-md-9">
-            <Header title="Profile" icon={getIconForTitle('Profile')} />
+            <Header title="Profile"  />
             <div className="row pt-6 mt-6">
               <UserInfoCard userName={user?.name} />
               <SalesPlanningCard />
