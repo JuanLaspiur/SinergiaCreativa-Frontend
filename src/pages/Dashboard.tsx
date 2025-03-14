@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaHome, FaCogs, FaUser } from 'react-icons/fa'; // Importamos íconos
+import { FaHome, FaCogs, FaUser } from 'react-icons/fa'; 
 import DollarCard from "../components/DollarCard";
 import Header from "../components/Header";
 import ProductTable from "../components/ProductTable";
@@ -14,11 +14,11 @@ function Dashboard() {
   const { user, logout} = useAuth();
   const [isSaleCardOpen, setIsSaleCardOpen] = useState(false); 
   const [selectedMenu, setSelectedMenu] = useState<string>('Home'); 
+
   const handleNewSaleClick = () => {
     setIsSaleCardOpen(!isSaleCardOpen);
   };
 
-  // Asignamos los iconos a cada título
   const getIconForTitle = (title: string) => {
     switch (title) {
       case 'Home':
@@ -32,11 +32,12 @@ function Dashboard() {
     }
   };
 
+
+
   return (
     <div className="container-fluid min-vh-100">
       <div className="row">
         <Sidebar selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} logout={logout} />
-        
         {(selectedMenu === 'Home' || selectedMenu === 'Logout') && (
           <div className="col-md-9">
             <Header title="Bienvenido a tu Dashboard" onClick={handleNewSaleClick} icon={getIconForTitle('Home')} />
@@ -70,7 +71,7 @@ function Dashboard() {
           </div>
         )}
       </div>
-    </div>
+      </div>
   );
 }
 
