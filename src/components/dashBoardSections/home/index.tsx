@@ -7,6 +7,7 @@ import UserInfoCard from './UserInfoCard';
 import { ISale } from '../../../interfaces/Sale';
 import Tab from '../../commons/Tab';  
 import SalesTable from '../../SalesTable';
+import Clock from './Clock';
 
 interface HomeProps {
   dailySales: ISale[];
@@ -42,10 +43,11 @@ function Home({ dailySales, monthlySales, userName }: HomeProps) {
   return (
     <div className="col-md-9">
       <Header title="Bienvenido a tu Dashboard" onClick={handleNewSaleClick} />
-      <div className="row pt-6 mt-6">
+      <div className="row pt-6 my-6">
         <UserInfoCard userName={userName} dailySales={dailySales} monthlySales={monthlySales} />
         <DollarCard />
         <SaleModal onClick={handleNewSaleClick} show={isSaleCardOpen} />
+        <Clock/>
       </div>
       <Tab tabs={tabs} />
     </div>

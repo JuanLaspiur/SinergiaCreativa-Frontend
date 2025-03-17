@@ -42,14 +42,13 @@ function Profile({dailySales, monthlySales, userName}:ProfileProps) {
 
 
   return (
-    <div className="col-md-9">
+    <div className="col-md-9 pb-5">
     <Header title="Profile"  />
     <div className="row pt-6 mt-6">
     <UserInfoCard userName={userName} dailySales={dailySales} monthlySales={monthlySales}/>
-      <SalesPlanningCard />
+    <SalesPlanningCard />
     </div>
     <Tab tabs={tabs} />
-
    
   </div>
   )

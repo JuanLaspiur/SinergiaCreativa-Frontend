@@ -19,8 +19,8 @@ const UserInfoCard = ({ userName, dailySales, monthlySales }: UserInfoCardProps)
   const [currentMonth, setCurrentMonth] = useState<string>('');
 
   const fetchUserData = async () => {
-    const netIncome = dailySales.reduce((acc, sale) => acc + sale.total, 0);
-    const netMonthlyIncome = monthlySales.reduce((acc, sale) => acc + sale.total, 0);
+    const netIncome = dailySales.reduce((acc, sale) => acc + sale.profit, 0);
+    const netMonthlyIncome = monthlySales.reduce((acc, sale) => acc + sale.profit, 0);
     setUserData({
       name: userName ? userName : '',
       netIncome,

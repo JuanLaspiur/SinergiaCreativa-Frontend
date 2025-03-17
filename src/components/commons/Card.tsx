@@ -2,7 +2,7 @@ import React from 'react';
 
 interface CardProps {
   title: string;
-  text: string;
+  text?: string;
   buttonText?: string; 
   children?: React.ReactNode;  
 }
