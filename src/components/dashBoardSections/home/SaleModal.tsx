@@ -42,7 +42,7 @@ function SaleModal({ onClick, show }: SaleModalProps) {
     };
 
     try {
-      await addSale(newSale); // Usa la función addSale del contexto
+      await addSale(newSale); 
 
       showMessage(
         'success',
@@ -79,6 +79,7 @@ function SaleModal({ onClick, show }: SaleModalProps) {
       </div>
       <div className="mb-3">
         <label htmlFor="quantity" className="form-label">Cantidad</label>
+        {/* Que sea siempre 1 la cantidad */}
         <input
           type="number"
           id="quantity"

@@ -1,7 +1,7 @@
 import { $api } from './api';
-import { ISale, ApiResponse } from '../interfaces/Sale';
+import { ISale, ApiResponse, IdataSale } from '../interfaces/Sale';
 
-export const createSale = async (saleData: ISale) => {
+export const createSale = async (saleData: IdataSale) => {
   try {
     const response = await $api.post('/sales', saleData); 
     return response.data; 

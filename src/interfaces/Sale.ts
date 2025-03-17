@@ -18,9 +18,17 @@ export interface ISale {
     monthlySales: ISale[];
     userSales: ISale[];
     error: string | null;
-    addSale: (saleData: ISale) => Promise<void>;
+    addSale: (saleData: IdataSale) => Promise<void>;
     fetchAllSales: () => Promise<void>;
     fetchDailySales: () => Promise<void>;
     fetchMonthlySales: () => Promise<void>;
     fetchUserSales: () => Promise<void>;
   }
+
+  export interface IdataSale {
+    product:string,
+    userId:string,
+    total:number,
+    date:string
+  }
+

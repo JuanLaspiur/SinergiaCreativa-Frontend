@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useAuth } from './AuthContext';
 import { createSale, getAllSales, getDailySales, getMonthlySales, getSalesByUserId } from '../services/sale';
-import {ISale, SalesContextType} from '../interfaces/Sale' 
+import {ISale, SalesContextType, IdataSale} from '../interfaces/Sale' 
 
 
 const SalesContext = createContext<SalesContextType | undefined>(undefined);
@@ -60,7 +60,7 @@ export const SalesProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const addSale = async (saleData: ISale) => {
+  const addSale = async (saleData: IdataSale) => {
     try {
       await createSale(saleData);
     } catch  {
