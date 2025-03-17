@@ -2,6 +2,8 @@ import { useState, useMemo, useEffect } from 'react';
 import Modal from '../../commons/Modal';
 import { useProducts } from '../../../hooks/useProducts';
 import useHandleSale from '../../../hooks/useHandleSale'; 
+import { useSales } from '../../../contexts/SaleContext';
+import { getCommissionPercentage } from '../../../helpers/productHelpers';
 
 interface SaleModalProps {
   onClick?: () => void;
@@ -10,13 +12,29 @@ interface SaleModalProps {
 
 function SaleModal({ onClick, show }: SaleModalProps) {
   const { products } = useProducts();
-  const [selectedProductId, setSelectedProductId] = useState<string>('');
+  const { monthlySales } = useSales();
+  const [selectedProductId, setSelectedProductId] = useState<string>('');  
   const [quantity, setQuantity] = useState<number>(1);
 
   const selectedProduct = useMemo(
     () => products.find((product) => product._id === selectedProductId),
     [selectedProductId, products]
   );
+
+  const commissionPercentage = useMemo(() => {
+    if (selectedProduct) {
+      return getCommissionPercentage(selectedProduct, monthlySales); 
+    }
+    return 0;
+  }, [selectedProduct, monthlySales]);
+
+  const commissionAmount = useMemo(() => {
+    if (selectedProduct) {
+      const price = selectedProduct.price ?? 0;
+      return (price * commissionPercentage) / 100;
+    }
+    return 0;
+  }, [selectedProduct, commissionPercentage]);
 
   useEffect(() => {
     if (!show) {
@@ -68,14 +86,38 @@ function SaleModal({ onClick, show }: SaleModalProps) {
           id="price"
           className="form-control w-100"
           placeholder="Precio"
-          value={selectedProduct?.price ?? 0}
+          value={`$$ ${selectedProduct?.price ?? 0}`} 
           readOnly
           aria-label="Precio unitario"
         />
       </div>
+      <div className="mb-3">
+        <label htmlFor="commission" className="form-label">Comisión</label>
+        <input
+          type="text"
+          id="commission"
+          className="form-control w-100"
+          placeholder="Comisión"
+          value={`${commissionPercentage}%`}
+          readOnly
+          aria-label="Comisión"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="commissionAmount" className="form-label">Ganancia por Comisión</label>
+        <input
+          type="text"
+          id="commissionAmount"
+          className="form-control w-100"
+          placeholder="Ganancia por comisión"
+          value={`$$ ${commissionAmount.toFixed(2)}`} 
+          readOnly
+          aria-label="Ganancia por comisión"
+        />
+      </div>
       <button
         className="btn btn-primary w-100"
-        onClick={() => handleSale(selectedProductId, selectedProduct?.price ?? 0, selectedProduct?.title, quantity)}
+        onClick={() => handleSale(selectedProduct, quantity, commissionAmount)}
         aria-label="Realizar venta"
         disabled={loading} 
       >

@@ -2,13 +2,8 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useSales } from '../contexts/SaleContext';
 import Swal from 'sweetalert2';
-
-interface Sale {
-  product: string;
-  userId: string;
-  total: number;
-  date: string;
-}
+import { IProduct } from '../interfaces/Product';
+import { IdataSale } from '../interfaces/Sale';
 
 const useHandleSale = (onClick?: () => void) => {
   const { user } = useAuth();
@@ -20,21 +15,25 @@ const useHandleSale = (onClick?: () => void) => {
   };
 
   const handleSale = async (
-    selectedProductId: string,
-    selectedProductPrice: number,
-    selectedProductName:string | undefined,
-    quantity: number
+    selectedProduc:IProduct | undefined ,
+    quantity: number,
+    profit:number
   ) => {
-    if (!selectedProductId || quantity <= 0) {
+    if(!selectedProduc)
+        return
+
+    if (!selectedProduc?._id || quantity <= 0) {
       showMessage('error', '¡Error!', 'Todos los campos deben estar completos y válidos.');
       return;
     }
+   
 
-    const newSale: Sale = {
-      product: selectedProductId,
+    const newSale: IdataSale = {
+      product: selectedProduc?._id,
       userId: user?._id || '',
-      total: quantity * selectedProductPrice,
+      total: quantity * selectedProduc?.price,
       date: new Date().toISOString(),
+      profit
     };
 
     setLoading(true);
@@ -44,7 +43,7 @@ const useHandleSale = (onClick?: () => void) => {
       showMessage(
         'success',
         '¡Venta realizada!',
-        `Producto: ${selectedProductName}\nCantidad: ${quantity}\nTotal: $${quantity * selectedProductPrice}`
+        `Producto: ${selectedProduc?.title}\nCantidad: ${quantity}\nTotal: $${quantity * selectedProduc?.price}`
       );
       if (onClick) onClick();
     } catch (error) {

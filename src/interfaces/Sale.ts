@@ -3,6 +3,8 @@ import { IProduct } from "./Product";
 export interface ISale {
     product: IProduct; 
     userId: string;   
+    price: number;  
+    profit: number; 
     total: number;   
     date: string;    
   }
@@ -29,6 +31,7 @@ export interface ISale {
     product:string,
     userId:string,
     total:number,
-    date:string
+    date:string,
+    profit:number;
   }
 

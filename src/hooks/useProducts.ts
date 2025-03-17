@@ -1,13 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { getAllProducts } from "../services/product";
+import { IProduct } from "../interfaces/Product";
 
-interface Product {
-  _id: string;
-  title: string;
-  price: number;
-  stock: number;
-  image: string;
-}
 
 export interface ISortOrder {
   price: "asc" | "desc";
@@ -17,8 +11,8 @@ export interface ISortOrder {
 type SortableColumns = "price" | "stock";
 
 export const useProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [sortOrder, setSortOrder] = useState<ISortOrder>({ price: "asc", stock: "asc" });
 
   useEffect(() => {
