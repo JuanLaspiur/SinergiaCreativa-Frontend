@@ -1,9 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Modal from '../../commons/Modal';
-import Swal from 'sweetalert2';
-import { useAuth } from '../../../contexts/AuthContext';
 import { useProducts } from '../../../hooks/useProducts';
-import { useSales } from '../../../contexts/SaleContext'; 
+import useHandleSale from '../../../hooks/useHandleSale'; 
 
 interface SaleModalProps {
   onClick?: () => void;
@@ -11,9 +9,7 @@ interface SaleModalProps {
 }
 
 function SaleModal({ onClick, show }: SaleModalProps) {
-  const { user } = useAuth();
   const { products } = useProducts();
-  const { addSale } = useSales(); 
   const [selectedProductId, setSelectedProductId] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(1);
 
@@ -22,43 +18,16 @@ function SaleModal({ onClick, show }: SaleModalProps) {
     [selectedProductId, products]
   );
 
-  if (!show) return null;
-
-  const showMessage = (icon: 'success' | 'error', title: string, text: string) => {
-    Swal.fire({ icon, title, text });
-  };
-
-  const handleSale = async () => {
-    if (!selectedProductId || quantity <= 0 || !selectedProduct) {
-      showMessage('error', '¡Error!', 'Todos los campos deben estar completos y válidos.');
-      return;
-    }
-
-    const newSale = {
-      product: selectedProductId,
-      userId: user?._id || '',
-      total: quantity * selectedProduct.price,
-      date: new Date().toISOString(),
-    };
-
-    try {
-      await addSale(newSale); 
-
-      showMessage(
-        'success',
-        '¡Venta realizada!',
-        `Producto: ${selectedProduct.title}\nCantidad: ${quantity}\nTotal: $${quantity * selectedProduct.price}`
-      );
-
+  useEffect(() => {
+    if (!show) {
       setSelectedProductId('');
       setQuantity(1);
-
-      if (onClick) onClick();
-    } catch (error) {
-      console.error('Error al realizar la venta:', error);
-      showMessage('error', '¡Error!', 'Hubo un problema al realizar la venta.');
     }
-  };
+  }, [show]);
+
+  const { handleSale, loading } = useHandleSale(onClick);
+
+  if (!show) return null;
 
   return (
     <Modal title="Realizar Venta" onClose={onClick}>
@@ -70,6 +39,7 @@ function SaleModal({ onClick, show }: SaleModalProps) {
           value={selectedProductId}
           onChange={(e) => setSelectedProductId(e.target.value)}
           style={{ fontSize: '0.875rem' }}
+          aria-label="Seleccionar producto"
         >
           <option value="">Seleccione un producto</option>
           {products.map(({ _id, title }) => (
@@ -79,7 +49,6 @@ function SaleModal({ onClick, show }: SaleModalProps) {
       </div>
       <div className="mb-3">
         <label htmlFor="quantity" className="form-label">Cantidad</label>
-        {/* Que sea siempre 1 la cantidad */}
         <input
           type="number"
           id="quantity"
@@ -88,6 +57,8 @@ function SaleModal({ onClick, show }: SaleModalProps) {
           min={1}
           value={quantity}
           onChange={(e) => setQuantity(Math.max(Number(e.target.value), 1))}
+          readOnly
+          aria-label="Cantidad de producto"
         />
       </div>
       <div className="mb-3">
@@ -99,10 +70,16 @@ function SaleModal({ onClick, show }: SaleModalProps) {
           placeholder="Precio"
           value={selectedProduct?.price ?? 0}
           readOnly
+          aria-label="Precio unitario"
         />
       </div>
-      <button className="btn btn-primary w-100" onClick={handleSale}>
-        Realizar Venta
+      <button
+        className="btn btn-primary w-100"
+        onClick={() => handleSale(selectedProductId, selectedProduct?.price ?? 0, selectedProduct?.title, quantity)}
+        aria-label="Realizar venta"
+        disabled={loading} 
+      >
+        {loading ? 'Procesando...' : 'Realizar Venta'}
       </button>
     </Modal>
   );
