@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Modal} from './commons/export';
+import {Modal} from './commons/componentsExports';
 import Swal from "sweetalert2";
 
 interface RecoverPasswordModalProps {

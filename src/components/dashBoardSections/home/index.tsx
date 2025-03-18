@@ -2,13 +2,9 @@ import { useState } from 'react';
 import { useSales } from '../../../contexts/SaleContext';
 import Header from '../../commons/Header';
 import ProductTable from '../../ProductTable';
-import DollarCard from './DollarCard';
-import SaleModal from './SaleModal';
-import UserInfoCard from './UserInfoCard';
-
+import { DollarCard, SaleModal, UserInfoCard, Clock } from './componentsExports';
 import Tab from '../../commons/Tab';  
 import SalesTable from '../../SalesTable';
-import Clock from './Clock';
 
 interface HomeProps {
   userName: string | undefined;
@@ -16,7 +12,8 @@ interface HomeProps {
 
 function Home({ userName }: HomeProps) {
   const [isSaleCardOpen, setIsSaleCardOpen] = useState(false);
-  const {dailySales, monthlySales} = useSales()
+  const { dailySales, monthlySales } = useSales();
+
   const handleNewSaleClick = () => {
     setIsSaleCardOpen(!isSaleCardOpen);
   };
@@ -34,7 +31,7 @@ function Home({ userName }: HomeProps) {
       title: "Ventas",
       component: (
         <div className="row">
-          <SalesTable/>
+          <SalesTable />
         </div>
       ),
     },
@@ -47,7 +44,7 @@ function Home({ userName }: HomeProps) {
         <UserInfoCard userName={userName} dailySales={dailySales} monthlySales={monthlySales} />
         <DollarCard />
         <SaleModal onClick={handleNewSaleClick} show={isSaleCardOpen} />
-        <Clock/>
+        <Clock />
       </div>
       <Tab tabs={tabs} />
     </div>

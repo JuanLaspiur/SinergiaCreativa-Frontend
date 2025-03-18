@@ -1,4 +1,4 @@
-import {Card} from '../../commons/export';
+import {Card} from '../../commons/componentsExports';
 import { useState } from 'react';
 
 

@@ -1,6 +1,6 @@
-import {Header, Tab} from "../../commons/export";
+import {Header, Tab} from "../../commons/componentsExports";
 import { useSales } from "../../../contexts/SaleContext";
-import {CommissionGraph, MonthlySalesGraph, NetIncomeGraph, SalesTableGraph} from "./graphs/export";
+import {CommissionGraph, MonthlySalesGraph, NetIncomeGraph, SalesTableGraph} from "./graphs/componentsExports";
 import SalesPlanningCard from "./SalesPlanningCard";
 import UserInfoCard from "./UserInfoCard";
 

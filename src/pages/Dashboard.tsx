@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Home, Profile, Settings } from "../components/dashBoardSections/export";
+import { Home, Profile, Settings } from "../components/dashBoardSections/componentsExports";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import Sidebar from "../components/Sidebar";
 function Dashboard() {

@@ -1,4 +1,4 @@
-import { Header } from "../../commons/export";
+import { Header } from "../../commons/componentsExports";
 
 function Settings() {
   return (
