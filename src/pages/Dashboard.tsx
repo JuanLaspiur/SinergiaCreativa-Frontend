@@ -34,7 +34,7 @@ function Dashboard() {
           <Home userName={user?.name}/>
         )}
         {selectedMenu === 'Profile' && (
-         <Profile userName={user?.name}/>
+         <Profile user={user}/>
         )}    
          {selectedMenu === 'Settings' && (
           <Settings/>
