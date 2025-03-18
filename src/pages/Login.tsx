@@ -22,7 +22,7 @@ const Login: React.FC = () => {
       Swal.fire({
         icon: "error",
         title: "¡Error al iniciar sesión!",
-        text: "Intentelo más tarde",
+        text: "Inténtelo más tarde",
       });
       console.error('Error al iniciar sesión:', error);
     } finally {
@@ -39,18 +39,24 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <div className="card" style={{ width: '20rem' }}>
-        <div className="card-body">
-          <h5 className="card-title text-center mb-4">Login</h5>
+<div className="d-flex justify-content-center align-items-center vh-100 bg-primary animate__animated animate__fadeIn animate__faster">
+      <div className="card shadow-lg" style={{ width: '22rem', borderRadius: '15px' }}>
+        <div className="card-body p-4">
+          <h5 className="card-title text-center mb-4">Iniciar Sesión</h5>
           <LoginForm onSubmit={handleSubmit} isLoading={isLoading} />
           <div className="text-center mt-3">
-            <span>¿No tiene cuenta aún? <a href="#" onClick={toggleRegisterModal}>Regístrate</a></span>
+            <span>¿No tiene cuenta aún?{" "}
+              <a href="#" onClick={toggleRegisterModal} className="text-primary fw-bold">
+                Regístrate
+              </a>
+            </span>
           </div>
-          <div className="text-center">
-
-            <span className="text-muted" style={{fontSize:'12px'}}>
-              ¿Olvidaste la contraseña? <a href="#" onClick={toggleRecoverModal}>Recuperar</a>
+          <div className="text-center mt-2">
+            <span className="text-muted" style={{ fontSize: '12px' }}>
+              ¿Olvidaste la contraseña?{" "}
+              <a href="#" onClick={toggleRecoverModal} className="text-primary">
+                Recuperar
+              </a>
             </span>
           </div>
         </div>

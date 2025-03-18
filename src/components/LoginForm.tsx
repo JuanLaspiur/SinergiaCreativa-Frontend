@@ -17,7 +17,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, isLoading }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
        <InputField
         id="loginEmail"
         label="Email"
