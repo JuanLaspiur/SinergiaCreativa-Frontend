@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useSales } from '../../../contexts/SaleContext';
 import Header from '../../commons/Header';
-import ProductTable from '../../ProductTable';
-import { DollarCard, SaleModal, UserInfoCard, Clock } from './componentsExports';
+import { DollarCard, SaleModal, UserInfoCard, Clock, ProductTable } from './componentsExports';
 import Tab from '../../commons/Tab';  
-import SalesTable from '../../SalesTable';
+import SalesTable from '../profile/SalesTable';
 
 interface HomeProps {
   userName: string | undefined;

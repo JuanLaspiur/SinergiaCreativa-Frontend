@@ -1,4 +1,3 @@
-import 'animate.css';
 import { AuthProvider } from './contexts/AuthContext';
 import { SalesProvider } from './contexts/SaleContext'; 
 import Dashboard from './pages/Dashboard';

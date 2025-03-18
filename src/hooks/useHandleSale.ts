@@ -33,7 +33,7 @@ const useHandleSale = (onClick?: () => void) => {
       userId: user?._id || '',
       total: quantity * selectedProduc?.price,
       date: new Date().toISOString(),
-      profit
+      profit:parseFloat(profit.toFixed(2))
     };
 
     setLoading(true);

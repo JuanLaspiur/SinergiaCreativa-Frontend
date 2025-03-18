@@ -1,12 +1,13 @@
 // @ts-ignore
 import { FC, useState } from "react";
-import { useProducts } from "../../hooks/useProducts";
+import { useProducts } from "../../../../hooks/useProducts";
 import ProductFilter from "./ProductFilter";
-import Table from "../commons/Table";
-import { IProduct } from "../../interfaces/Product";
-import { useSales } from "../../contexts/SaleContext";
-import { getTotalSalesByProduct } from "../../helpers/productHelpers";
+import Table from "../../../commons/Table";
+import { IProduct } from "../../../../interfaces/Product";
+import { useSales } from "../../../../contexts/SaleContext";
+import { getTotalSalesByProduct } from "../../../../helpers/productHelpers";
 import ProductDetailModal from "./ProductDetailModal";
+import { FaEye } from "react-icons/fa";
 
 const ProductTable: FC = () => {
   const { products, filteredProducts, setFilteredProducts, sortOrder, handleSort } = useProducts();
@@ -20,7 +21,6 @@ const ProductTable: FC = () => {
     { label: "Ventas Totales Mes", key: "totalSales" },
     { label: "Ver mas", key: "see more" }
   ];
-
   const renderRow = (product: IProduct) => {
     const totalSales = getTotalSalesByProduct(product._id, monthlySales);
     return (
@@ -29,7 +29,12 @@ const ProductTable: FC = () => {
         <td>$$ {product.price}</td>
         <td>{product.stock}</td>
         <td>{totalSales}</td>
-        <td><p onClick={()=>handleRowClick(product)}>Ver mas</p></td>
+        <td>  <button
+                className="btn btn-primary animate__animated animate__pulse" 
+            onClick={() => handleRowClick(product)}
+          >
+            <FaEye />
+          </button></td> 
       </>
     );
   };

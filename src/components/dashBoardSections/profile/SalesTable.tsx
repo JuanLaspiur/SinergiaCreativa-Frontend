@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
-import { useSales } from "../contexts/SaleContext";
-import Table from "./commons/Table";
-import { ISale } from "../interfaces/Sale";
-import { formatDate } from "../helpers/formatDateHelper";
-import Pagination from "./commons/Pagination";
+import { useSales } from "../../../contexts/SaleContext";
+import Table from "../../commons/Table";
+import { ISale } from "../../../interfaces/Sale";
+import { formatDate } from "../../../helpers/formatDateHelper";
+import Pagination from "../../commons/Pagination";
 
 const SalesTable: FC = () => {
   const { userSales } = useSales();

@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { IProduct } from "../../interfaces/Product";
-import { getCommission } from "../../helpers/productHelpers";
-import Modal from "../commons/Modal";
-import { useSales } from "../../contexts/SaleContext";
+import { IProduct } from "../../../../interfaces/Product";
+import { getCommission } from "../../../../helpers/productHelpers";
+import Modal from "../../../commons/Modal";
+import { useSales } from "../../../../contexts/SaleContext";
 
 interface ProductDetailModalProps {
   product: IProduct | null;
