@@ -20,6 +20,8 @@ export const SalesProvider = ({ children }: { children: ReactNode }) => {
   const [monthlySales, setMonthlySales] = useState<ISale[]>([]);
   const [userSales, setUserSales] = useState<ISale[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [updateTriggered, setUpdateTriggered] = useState(false);
+
 
   const { user } = useAuth()
   const userId = user?._id as string;
@@ -63,6 +65,8 @@ export const SalesProvider = ({ children }: { children: ReactNode }) => {
   const addSale = async (saleData: IdataSale) => {
     try {
       await createSale(saleData);
+      const updateEvent = new CustomEvent('updateProducts');
+      window.dispatchEvent(updateEvent);
     } catch  {
       setError('Failed to create sale');
     }
@@ -75,8 +79,19 @@ export const SalesProvider = ({ children }: { children: ReactNode }) => {
       fetchMonthlySales();
       fetchUserSales();
     }
-  }, [userId, user?._id]); 
+  }, [userId, user?._id, updateTriggered]); 
 
+  useEffect(() => {
+    const handleUpdateEvent = () => {
+      setUpdateTriggered(prevState => !prevState); 
+    };
+
+    window.addEventListener('updateProducts', handleUpdateEvent);
+    return () => {
+      window.removeEventListener('updateProducts', handleUpdateEvent);
+    };
+  
+  },[])
   return (
     <SalesContext.Provider
       value={{ sales, dailySales, monthlySales, userSales, error, addSale, fetchAllSales, fetchDailySales, fetchMonthlySales, fetchUserSales }}

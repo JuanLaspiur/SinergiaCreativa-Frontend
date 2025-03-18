@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Home, Profile, Settings } from "../components/dashBoardSections/componentsExports";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import Sidebar from "../components/Sidebar";
+
 function Dashboard() {
   const { user, logout } = useAuth();
   const [selectedMenu, setSelectedMenu] = useState<string>('Home'); 

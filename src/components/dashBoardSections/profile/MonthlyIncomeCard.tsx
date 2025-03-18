@@ -1,12 +1,11 @@
 import Card from '../../commons/Card';
-import { ISale } from '../../../interfaces/Sale';  // Asegúrate de que ISale esté definido correctamente
+import { ISale } from '../../../interfaces/Sale'; 
 
 interface MonthlyIncomeCardProps {
-  monthlySales: ISale[];  // Recibimos las ventas mensuales
+  monthlySales: ISale[];  
 }
 
 const MonthlyIncomeCard = ({ monthlySales }: MonthlyIncomeCardProps) => {
-  // Calculamos la ganancia mensual sumando las ganancias de todas las ventas
   const monthlyIncome = monthlySales.reduce((acc, sale) => acc + sale.profit, 0);
 
   return (

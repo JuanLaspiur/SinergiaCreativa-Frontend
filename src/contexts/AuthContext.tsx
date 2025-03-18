@@ -2,7 +2,6 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 import { login as apiLogin } from "../services/auth";
 import { IUser } from "../interfaces/User";
 
-
 interface AuthContextType {
   user: IUser | null;
   token: string | null;
@@ -53,7 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem("authToken");
       localStorage.removeItem("authUser");
     }
-  }, [setToken, setUser]);
+  }, []);
 
   const logout = () => {
     setUser(null);
@@ -61,6 +60,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("authUser");
   };
+
+  const handleUpdateEvent = (event: CustomEvent) => {
+    const updatedUser: IUser = event.detail;
+    if (updatedUser) {
+      setUser(updatedUser);
+      localStorage.setItem("authUser", JSON.stringify(updatedUser)); 
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('updateExpectedMonthlyIncome', handleUpdateEvent as EventListener);
+
+    return () => {
+      window.removeEventListener('updateExpectedMonthlyIncome', handleUpdateEvent as EventListener);
+    };
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout, setToken, setUser }}>

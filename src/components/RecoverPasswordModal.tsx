@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Modal} from './commons/componentsExports';
+import { Modal } from './commons/componentsExports';
 import Swal from "sweetalert2";
 
 interface RecoverPasswordModalProps {
@@ -31,8 +31,12 @@ const RecoverPasswordModal: React.FC<RecoverPasswordModalProps> = ({ show, onClo
 
   return (
     show && (
-      <Modal title="Recuperar Contraseña" onClose={onClose}>
-        <div>
+      <Modal 
+        title="Recuperar Contraseña" 
+        onClose={onClose}
+
+      >
+        <div className="animate__animated animate__fadeIn">
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Correo electrónico
@@ -47,7 +51,7 @@ const RecoverPasswordModal: React.FC<RecoverPasswordModalProps> = ({ show, onClo
             />
           </div>
           <button
-            className="btn btn-primary w-100"
+            className="btn btn-primary w-100 animate__animated animate__pulse"
             onClick={handleRecover}
           >
             Recuperar

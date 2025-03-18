@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from '../../commons/Modal';
 import { useProducts } from '../../../hooks/useProducts';
 import useHandleSale from '../../../hooks/useHandleSale'; 
@@ -16,25 +16,10 @@ function SaleModal({ onClick, show }: SaleModalProps) {
   const [selectedProductId, setSelectedProductId] = useState<string>('');  
   const [quantity, setQuantity] = useState<number>(1);
 
-  const selectedProduct = useMemo(
-    () => products.find((product) => product._id === selectedProductId),
-    [selectedProductId, products]
-  );
-
-  const commissionPercentage = useMemo(() => {
-    if (selectedProduct) {
-      return getCommissionPercentage(selectedProduct, monthlySales); 
-    }
-    return 0;
-  }, [selectedProduct, monthlySales]);
-
-  const commissionAmount = useMemo(() => {
-    if (selectedProduct) {
-      const price = selectedProduct.price ?? 0;
-      return (price * commissionPercentage) / 100;
-    }
-    return 0;
-  }, [selectedProduct, commissionPercentage]);
+  const selectedProduct = products.find((product) => product._id === selectedProductId);
+  
+  const commissionPercentage = selectedProduct ? getCommissionPercentage(selectedProduct, monthlySales) : 0;
+  const commissionAmount = selectedProduct ? (selectedProduct.price ?? 0) * (commissionPercentage / 100) : 0;
 
   useEffect(() => {
     if (!show) {

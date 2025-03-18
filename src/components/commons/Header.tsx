@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FaHome, FaCogs, FaUser } from 'react-icons/fa'; 
+import { FaCogs, FaUser } from 'react-icons/fa'; 
 interface HeaderProps {
   title: string;
   onClick?: () => void;
@@ -10,7 +10,7 @@ const Header: FC<HeaderProps> = ({ title, onClick }) => {
     const getIconForTitle = (title: string) => {
       switch (title) {
         case 'Bienvenido a tu Dashboard':
-          return <FaHome />;
+          return null;
         case 'Settings':
           return <FaCogs />;
         case 'Profile':

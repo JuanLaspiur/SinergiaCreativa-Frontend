@@ -45,6 +45,7 @@ const useHandleSale = (onClick?: () => void) => {
         '¡Venta realizada!',
         `Producto: ${selectedProduc?.title}\nCantidad: ${quantity}\nTotal: $${quantity * selectedProduc?.price}`
       );
+     
       if (onClick) onClick();
     } catch (error) {
       console.error('Error al realizar la venta:', error);

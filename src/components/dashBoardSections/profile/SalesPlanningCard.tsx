@@ -40,7 +40,9 @@ const SalesPlanningCard = ({ userExpected, userId, monthlySales }: SalesPlanning
         return;
       }
 
-      await updateExpectedMonthlyIncome(userId, income);
+      const roundedIncome = income.toFixed(2);
+
+      await updateExpectedMonthlyIncome(userId, parseFloat(roundedIncome));
 
       Swal.fire({
         icon: 'success',
@@ -62,10 +64,11 @@ const SalesPlanningCard = ({ userExpected, userId, monthlySales }: SalesPlanning
   return (
     <Card title="Mi Planificación Mensual" text={''}>
       <div className="mb-3">
-        <p><strong>Expectativa de Ganancia Mensual:</strong> $$ {userExpected ? userExpected : ''}</p>
-        <p><strong>Ganancia mensual actual:</strong> $$ {netMonthlyIncome ? netMonthlyIncome : ''}</p>
+        {/* Formatear los valores a 2 decimales */}
+        <p><strong>Expectativa Mensual:</strong> $$ {userExpected ? userExpected.toFixed(2) : '0.00'}</p>
+        <p><strong>Ganancia mensual actual:</strong> $$ {netMonthlyIncome ? netMonthlyIncome.toFixed(2) : '0.00'}</p>
         {userExpected && (
-          <p><strong>Falta para objetivo mensual:</strong> $$ {missingAmount}</p>
+          <p><strong>Falta para objetivo mensual:</strong> $$ {missingAmount.toFixed(2)}</p>
         )}
       </div>
       <button className="btn btn-primary" onClick={handleEditPlanning}>
@@ -88,7 +91,7 @@ const SalesPlanningCard = ({ userExpected, userId, monthlySales }: SalesPlanning
             <button className="btn btn-primary" onClick={handleUpdateExpectedIncome}>
               Actualizar Expectativa
             </button>
-            <button className="btn btn-secondary ml-2" onClick={handleCloseModal}>
+            <button className="btn btn-secondary mx-2" onClick={handleCloseModal}>
               Cancelar
             </button>
           </div>
