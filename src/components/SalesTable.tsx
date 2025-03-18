@@ -3,14 +3,12 @@ import { useSales } from "../contexts/SaleContext";
 import Table from "./commons/Table";
 import { ISale } from "../interfaces/Sale";
 import { formatDate } from "../helpers/formatDateHelper";
+import Pagination from "./Pagination";
 
 const SalesTable: FC = () => {
   const { userSales } = useSales();
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 7;
-
-  const totalPages = Math.ceil(userSales.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const columns = [
     { label: "Producto", key: "productName" },
@@ -19,62 +17,36 @@ const SalesTable: FC = () => {
     { label: "Fecha", key: "date" },
   ];
 
+  // Calcular el índice de los elementos actuales para la página
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentSales = userSales.slice(startIndex, endIndex);
+
   const renderRow = (sale: ISale) => (
     <>
       <td>{sale?.product?.title}</td>
       <td>$$ {sale?.total}</td>
-      <td>$$ {sale?.profit ? sale?.profit : ''}</td>
+      <td>$$ {sale?.profit ? sale?.profit : ""}</td>
       <td>{sale?.date && formatDate(sale?.date)}</td>
     </>
   );
-
-  // Paginación: Filtrar las ventas según la página actual
-  const paginatedSales = userSales.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
 
   return (
     <div className="container my-5">
       <h2 className="mb-4">Tabla de Ventas</h2>
       <Table
         columns={columns}
-        data={paginatedSales} 
-        filteredData={paginatedSales} 
+        data={currentSales}
+        filteredData={currentSales}
         renderRow={renderRow}
         noDataMessage="No se encontraron ventas"
       />
-      <div className="d-flex justify-content-between mt-3">
-        <button
-          className="btn btn-secondary"
-          onClick={handlePrevPage}
-          disabled={currentPage === 1}
-        >
-          Anterior
-        </button>
-        <span>
-          Página {currentPage} de {totalPages}
-        </span>
-        <button
-          className="btn btn-secondary"
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Siguiente
-        </button>
-      </div>
+      <Pagination
+        dataLength={userSales.length}
+        itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+        onPageChange={(page: number) => setCurrentPage(page)}
+      />
     </div>
   );
 };
