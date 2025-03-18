@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -23,7 +23,7 @@ const NetIncomeGraph = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'top' as const,
       },
       title: {
         display: true,
@@ -36,17 +36,6 @@ const NetIncomeGraph = () => {
       },
     },
   };
-
-  useEffect(() => {
-    return () => {
-      // Limpiar cualquier gráfico creado previamente
-      if (window.Chart && window.Chart.instances) {
-        window.Chart.instances.forEach(instance => {
-          instance.destroy();
-        });
-      }
-    };
-  }, []);
 
   return <Line data={data} options={options} />;
 };

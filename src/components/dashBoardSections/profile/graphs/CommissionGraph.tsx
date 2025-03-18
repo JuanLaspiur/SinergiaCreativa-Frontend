@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -30,7 +29,7 @@ const CommissionGraph = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'top' as const,
       },
       title: {
         display: true,
@@ -43,16 +42,6 @@ const CommissionGraph = () => {
       },
     },
   };
-
-  useEffect(() => {
-    return () => {
-      if (window.Chart && window.Chart.instances) {
-        window.Chart.instances.forEach(instance => {
-          instance.destroy();
-        });
-      }
-    };
-  }, []);
 
   return <Bar data={data} options={options} />;
 };

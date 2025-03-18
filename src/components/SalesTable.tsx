@@ -3,7 +3,7 @@ import { useSales } from "../contexts/SaleContext";
 import Table from "./commons/Table";
 import { ISale } from "../interfaces/Sale";
 import { formatDate } from "../helpers/formatDateHelper";
-import Pagination from "./Pagination";
+import Pagination from "./commons/Pagination";
 
 const SalesTable: FC = () => {
   const { userSales } = useSales();

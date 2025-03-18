@@ -1,7 +1,6 @@
-// Importación de los componentes
 import CommissionGraph from './CommissionGraph';
 import MonthlySalesGraph from './MonthlySalesGraph';
 import NetIncomeGraph from './NetIncomeGraph';
-import SalesGraphTable from './SalesGraphTable';
+import SalesTableGraph from './SalesTableGraph';
 
-export { CommissionGraph, MonthlySalesGraph, NetIncomeGraph, SalesGraphTable };
+export { CommissionGraph, MonthlySalesGraph, NetIncomeGraph, SalesTableGraph };

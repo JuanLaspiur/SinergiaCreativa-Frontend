@@ -1,6 +1,6 @@
 import { ISale } from "../../../interfaces/Sale"
 import {Header, Tab} from "../../commons/export"
-import {CommissionGraph, MonthlySalesGraph, NetIncomeGraph, SalesGraphTable} from "./graphs/export"
+import {CommissionGraph, MonthlySalesGraph, NetIncomeGraph, SalesTableGraph} from "./graphs/export"
 import SalesPlanningCard from "./SalesPlanningCard"
 import UserInfoCard from "./UserInfoCard"
 
@@ -17,7 +17,7 @@ function Profile({dailySales, monthlySales, userName}:ProfileProps) {
       component: (
         <div className="row pt-6 mt-6">
         <div className="col-md-6">
-          <SalesGraphTable />
+          <SalesTableGraph />
         </div>
         <div className="col-md-6">
         <MonthlySalesGraph/>
