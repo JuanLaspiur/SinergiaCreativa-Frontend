@@ -1,22 +1,22 @@
 import { useState } from 'react';
+import { useSales } from '../../../contexts/SaleContext';
 import Header from '../../commons/Header';
 import ProductTable from '../../ProductTable';
 import DollarCard from './DollarCard';
 import SaleModal from './SaleModal';
 import UserInfoCard from './UserInfoCard';
-import { ISale } from '../../../interfaces/Sale';
+
 import Tab from '../../commons/Tab';  
 import SalesTable from '../../SalesTable';
 import Clock from './Clock';
 
 interface HomeProps {
-  dailySales: ISale[];
-  monthlySales: ISale[];
   userName: string | undefined;
 }
 
-function Home({ dailySales, monthlySales, userName }: HomeProps) {
+function Home({ userName }: HomeProps) {
   const [isSaleCardOpen, setIsSaleCardOpen] = useState(false);
+  const {dailySales, monthlySales} = useSales()
   const handleNewSaleClick = () => {
     setIsSaleCardOpen(!isSaleCardOpen);
   };

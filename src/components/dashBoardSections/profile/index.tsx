@@ -1,16 +1,14 @@
-import { ISale } from "../../../interfaces/Sale"
-import {Header, Tab} from "../../commons/export"
-import {CommissionGraph, MonthlySalesGraph, NetIncomeGraph, SalesTableGraph} from "./graphs/export"
-import SalesPlanningCard from "./SalesPlanningCard"
-import UserInfoCard from "./UserInfoCard"
+import {Header, Tab} from "../../commons/export";
+import { useSales } from "../../../contexts/SaleContext";
+import {CommissionGraph, MonthlySalesGraph, NetIncomeGraph, SalesTableGraph} from "./graphs/export";
+import SalesPlanningCard from "./SalesPlanningCard";
+import UserInfoCard from "./UserInfoCard";
 
 interface ProfileProps {
-    dailySales: ISale[],
-    monthlySales: ISale[],
     userName:string | undefined
 }
-function Profile({dailySales, monthlySales, userName}:ProfileProps) {
-
+function Profile({ userName}:ProfileProps) {
+const {dailySales, monthlySales} = useSales()
   const tabs = [
     {
       title: "Ventas",

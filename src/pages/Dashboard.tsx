@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { useSales } from "../contexts/SaleContext";
 import { Home, Profile, Settings } from "../components/dashBoardSections/export";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import Sidebar from "../components/Sidebar";
 function Dashboard() {
   const { user, logout } = useAuth();
-  const {dailySales, monthlySales} = useSales();
   const [selectedMenu, setSelectedMenu] = useState<string>('Home'); 
   const [showScrollButton, setShowScrollButton] = useState(false); 
 
@@ -33,10 +31,10 @@ function Dashboard() {
       <div className="row">
         <Sidebar selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} logout={logout} /> 
         {(selectedMenu === 'Home' || selectedMenu === 'Logout') && (
-          <Home dailySales={dailySales}  monthlySales={monthlySales} userName={user?.name}/>
+          <Home userName={user?.name}/>
         )}
         {selectedMenu === 'Profile' && (
-         <Profile dailySales={dailySales}  monthlySales={monthlySales} userName={user?.name}/>
+         <Profile userName={user?.name}/>
         )}    
          {selectedMenu === 'Settings' && (
           <Settings/>
