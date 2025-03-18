@@ -1,4 +1,4 @@
-// @ts-ignore
+//@ts-expect-error
 import React, { FC } from "react";
 import { ISortOrder } from "../../hooks/useProducts";
 
