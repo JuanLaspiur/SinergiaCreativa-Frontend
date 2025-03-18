@@ -20,7 +20,7 @@ const getCommissionBase = (product: IProduct, monthlySales: ISale[]): { percenta
 
   const commission = product.commissions?.find((c) => sales <= c.number);
   if (commission) {
-    return { percentage: commission.percentage, formatted: `${commission.percentage}% (hasta ${commission.number} ventas)` };
+    return { percentage: commission.percentage, formatted: `${commission.percentage}% (hasta ${commission.number} ventas para subir la comisión)` };
   }
 
   return { percentage: 0, formatted: "0%" };

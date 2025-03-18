@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { FC } from "react";
 import { ISortOrder } from "../../hooks/useProducts";
 
