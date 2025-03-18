@@ -15,7 +15,7 @@ const ProductTable: FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null); 
   const [showModal, setShowModal] = useState<boolean>(false); 
   const columns = [
-    { label: "Título", key: "title" },
+    { label: "Producto", key: "product" },
     { label: "Precio", key: "price", isSortable: true },
     { label: "Stock", key: "stock", isSortable: true },
     { label: "Ventas Totales Mes", key: "totalSales" },
@@ -25,19 +25,22 @@ const ProductTable: FC = () => {
     const totalSales = getTotalSalesByProduct(product._id, monthlySales);
     return (
       <>
-        <td>{product.title}</td>
-        <td>$$ {product.price}</td>
-        <td>{product.stock}</td>
-        <td>{totalSales}</td>
-        <td>  <button
-                className="btn btn-primary animate__animated animate__pulse" 
+        <td >{product.title}</td>
+        <td className="text-center">$$ {product.price}</td>
+        <td className="text-center">{product.stock}</td>
+        <td className="text-center">{totalSales}</td>
+        <td className="text-center">
+          <button
+            className="btn btn-primary animate__animated animate__pulse"
             onClick={() => handleRowClick(product)}
           >
             <FaEye />
-          </button></td> 
+          </button>
+        </td>
       </>
     );
   };
+  
 
   const handleRowClick = (product: IProduct) => {
     setSelectedProduct(product);

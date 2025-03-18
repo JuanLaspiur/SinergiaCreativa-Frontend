@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'; 
-import Card from '../../commons/Card';
-import { ISale } from '../../../interfaces/Sale';
+import Card from '../../commons/Card'; 
+import { ISale } from '../../../interfaces/Sale'; 
+import { FaUserCircle } from 'react-icons/fa'; 
 
 interface UserData {
   name: string;
@@ -22,7 +23,7 @@ const UserInfoCard = ({ userName, dailySales, monthlySales }: UserInfoCardProps)
     const netIncome = dailySales.reduce((acc, sale) => acc + sale.profit, 0);
     const netMonthlyIncome = monthlySales.reduce((acc, sale) => acc + sale.profit, 0);
     setUserData({
-      name: userName ? userName : '',
+      name: userName ? userName : 'Usuario desconocido',
       netIncome,
       netMonthlyIncome, 
     });
@@ -36,10 +37,15 @@ const UserInfoCard = ({ userName, dailySales, monthlySales }: UserInfoCardProps)
   }, [dailySales, userName, monthlySales]);
 
   return (
-    <Card title="Información del Usuario" text={`Bienvenido, ${userData?.name}`}>
+    <Card
+      title="Información del Usuario"
+      text={``}
+      icon={<FaUserCircle />} 
+    >
       <div className="mt-1">
         {userData ? (
           <>
+            <p className="card-text text-primary font-weight-bold">{`Bienvenido, ${userData.name}`}</p>
             <p><strong>Mes:</strong> {currentMonth}</p>
             <p><strong>Ganancia neta de hoy:</strong> $$ {userData.netIncome.toFixed(2)}</p>
             <p><strong>Ganancia neta mensual:</strong> $$ {userData.netMonthlyIncome.toFixed(2)}</p>

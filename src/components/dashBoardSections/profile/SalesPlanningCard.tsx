@@ -64,15 +64,14 @@ const SalesPlanningCard = ({ userExpected, userId, monthlySales }: SalesPlanning
   return (
     <Card title="Mi Planificación Mensual" text={''}>
       <div className="mb-3">
-        {/* Formatear los valores a 2 decimales */}
         <p><strong>Expectativa Mensual:</strong> $$ {userExpected ? userExpected.toFixed(2) : '0.00'}</p>
         <p><strong>Ganancia mensual actual:</strong> $$ {netMonthlyIncome ? netMonthlyIncome.toFixed(2) : '0.00'}</p>
-        {userExpected && (
+        {userExpected ? (
           <p><strong>Falta para objetivo mensual:</strong> $$ {missingAmount.toFixed(2)}</p>
-        )}
+        ) : ''}
       </div>
       <button className="btn btn-primary" onClick={handleEditPlanning}>
-        Editar Planificación de Ganancias
+        Editar Expectativa Mensual
       </button>
       
       {showModal && (

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FaCogs, FaUser } from 'react-icons/fa'; 
+import { FaCogs, FaUser, FaPlus } from 'react-icons/fa'; 
 interface HeaderProps {
   title: string;
   onClick?: () => void;
@@ -7,18 +7,19 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ title, onClick }) => {
   
-    const getIconForTitle = (title: string) => {
-      switch (title) {
-        case 'Bienvenido a tu Dashboard':
-          return null;
-        case 'Settings':
-          return <FaCogs />;
-        case 'Profile':
-          return <FaUser />;
-        default:
-          return null;
-      }
-    };
+  const getIconForTitle = (title: string) => {
+    switch (title) {
+      case 'Bienvenido a tu Dashboard':
+        return null;
+      case 'Settings':
+        return <FaCogs />;
+      case 'Profile':
+        return <FaUser />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="d-flex justify-content-between align-items-center my-5 pt-5">
       <div className="d-flex align-items-center">
@@ -31,6 +32,7 @@ const Header: FC<HeaderProps> = ({ title, onClick }) => {
       </div>
       {onClick && (
         <button className="btn btn-primary" onClick={onClick}>
+          <FaPlus className="me-2" />
           Nueva venta
         </button>
       )}
@@ -39,4 +41,3 @@ const Header: FC<HeaderProps> = ({ title, onClick }) => {
 };
 
 export default Header;
-

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'; 
-import Card from '../../commons/Card';
-import { ISale } from '../../../interfaces/Sale';
+import Card from '../../commons/Card'; 
+import { ISale } from '../../../interfaces/Sale'; 
+import { FaUserCircle } from 'react-icons/fa'; // Importando el ícono de react-icons
 
 interface UserInfoCardProps {
   userName?: string;
@@ -9,8 +10,8 @@ interface UserInfoCardProps {
   userSales: ISale[];
 }
 
-  const UserInfoCard = ({ userName, dailySales, monthlySales,userSales }: UserInfoCardProps) => {
-  const [userData, setUserData] = useState<{ name: string; netIncome: number; netMonthlyIncome: number; netIncomeUserSales:number } | null>(null);
+const UserInfoCard = ({ userName, dailySales, monthlySales, userSales }: UserInfoCardProps) => {
+  const [userData, setUserData] = useState<{ name: string; netIncome: number; netMonthlyIncome: number; netIncomeUserSales: number } | null>(null);
   const [currentMonth, setCurrentMonth] = useState<string>('');
 
   const calculateUserData = () => {
@@ -21,7 +22,7 @@ interface UserInfoCardProps {
       name: userName ? userName : '',
       netIncome,
       netMonthlyIncome,
-      netIncomeUserSales 
+      netIncomeUserSales
     });
 
     const month = new Date().toLocaleString('default', { month: 'long' });
@@ -33,7 +34,11 @@ interface UserInfoCardProps {
   }, [dailySales, userName, monthlySales]);
 
   return (
-    <Card title="Información del Usuario" text={`Bienvenido, ${userData?.name}`}>
+    <Card 
+      title="Información del Usuario" 
+      text={``} 
+      icon={<FaUserCircle />}
+    >
       <div className="mt-1">
         {userData ? (
           <>
@@ -51,5 +56,3 @@ interface UserInfoCardProps {
 };
 
 export default UserInfoCard;
-
-

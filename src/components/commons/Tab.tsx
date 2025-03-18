@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { FaBeer, FaCoffee } from 'react-icons/fa'; // Ejemplo de íconos
 
 interface TabItem {
   title: string;
   component: React.ReactNode;
+  icon?: React.ReactNode; // Icono opcional
 }
 
 interface TabProps {
@@ -25,6 +27,7 @@ const Tab = ({ tabs }: TabProps) => {
               role="tab"
               onClick={() => setActiveTab(index)}
             >
+              {tab.icon && <span className="me-2">{tab.icon}</span>}
               {tab.title}
             </a>
           </li>
