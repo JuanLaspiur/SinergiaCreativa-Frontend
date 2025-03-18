@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -10,11 +10,11 @@ const NetIncomeGraph = () => {
     datasets: [
       {
         label: 'Ganancia Neta',
-        data: [1200, 1500, 1400, 1800, 2100, 2200], // Datos de ganancias netas
-        borderColor: 'rgba(40, 167, 69, 1)', // Verde Bootstrap
-        backgroundColor: 'rgba(40, 167, 69, 0.2)', // Verde semitransparente
-        fill: true, // Llenar el área debajo de la línea
-        tension: 0.4, // Curvatura de la línea
+        data: [1200, 1500, 1400, 1800, 2100, 2200], 
+        borderColor: 'rgba(40, 167, 69, 1)',
+        backgroundColor: 'rgba(40, 167, 69, 0.2)', 
+        fill: true, 
+        tension: 0.4, 
       },
     ],
   };
@@ -23,7 +23,7 @@ const NetIncomeGraph = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'top' as const,
       },
       title: {
         display: true,
@@ -32,21 +32,10 @@ const NetIncomeGraph = () => {
     },
     scales: {
       y: {
-        beginAtZero: true, // Asegurarse de que el eje Y empiece desde cero
+        beginAtZero: true, 
       },
     },
   };
-
-  useEffect(() => {
-    return () => {
-      // Limpiar cualquier gráfico creado previamente
-      if (window.Chart && window.Chart.instances) {
-        window.Chart.instances.forEach(instance => {
-          instance.destroy();
-        });
-      }
-    };
-  }, []);
 
   return <Line data={data} options={options} />;
 };

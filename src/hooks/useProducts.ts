@@ -1,15 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { getAllProducts } from "../services/product";
+import { IProduct } from "../interfaces/Product";
 
-interface Product {
-  _id: string;
-  title: string;
-  price: number;
-  stock: number;
-  image: string;
-}
 
-interface SortOrder {
+export interface ISortOrder {
   price: "asc" | "desc";
   stock: "asc" | "desc";
 }
@@ -17,9 +11,9 @@ interface SortOrder {
 type SortableColumns = "price" | "stock";
 
 export const useProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [sortOrder, setSortOrder] = useState<SortOrder>({ price: "asc", stock: "asc" });
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+  const [sortOrder, setSortOrder] = useState<ISortOrder>({ price: "asc", stock: "asc" });
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,6 +29,18 @@ export const useProducts = () => {
     fetchProducts();
   }, []);
 
+  const sortedProducts = useMemo(() => {
+    return [...filteredProducts].sort((a, b) => {
+      const column = sortOrder.price === "asc" ? "price" : "stock";
+      const order = sortOrder[column];
+      if (order === "asc") {
+        return a[column] < b[column] ? -1 : 1;
+      } else {
+        return a[column] > b[column] ? -1 : 1;
+      }
+    });
+  }, [filteredProducts, sortOrder]);
+
   const handleSort = (column: SortableColumns) => {
     const newSortOrder = sortOrder[column] === "asc" ? "desc" : "asc";
 
@@ -46,14 +52,6 @@ export const useProducts = () => {
         newOrder.price = "asc";
       }
       return newOrder;
-    });
-
-    const sortedProducts = [...filteredProducts].sort((a, b) => {
-      if (newSortOrder === "asc") {
-        return a[column] < b[column] ? -1 : 1;
-      } else {
-        return a[column] > b[column] ? -1 : 1;
-      }
     });
 
     setFilteredProducts(sortedProducts);

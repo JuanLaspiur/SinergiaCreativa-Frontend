@@ -1,18 +1,30 @@
 import { FC } from "react";
-
+import { FaHome, FaCogs, FaUser } from 'react-icons/fa'; 
 interface HeaderProps {
   title: string;
   onClick?: () => void;
-  icon?: React.ReactNode;
 }
 
-const Header: FC<HeaderProps> = ({ title, onClick, icon }) => {
+const Header: FC<HeaderProps> = ({ title, onClick }) => {
+  
+    const getIconForTitle = (title: string) => {
+      switch (title) {
+        case 'Bienvenido a tu Dashboard':
+          return <FaHome />;
+        case 'Settings':
+          return <FaCogs />;
+        case 'Profile':
+          return <FaUser />;
+        default:
+          return null;
+      }
+    };
   return (
     <div className="d-flex justify-content-between align-items-center my-5 pt-5">
       <div className="d-flex align-items-center">
-        {icon && (
+        {getIconForTitle(title) && (
           <div className="me-3" style={{ fontSize: '2rem' }}>
-            {icon}
+            {getIconForTitle(title)}
           </div>
         )}
         <h1 className="mb-0">{title}</h1> 

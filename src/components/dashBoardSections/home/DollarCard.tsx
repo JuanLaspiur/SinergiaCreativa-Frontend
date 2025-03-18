@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Card from './commons/Card'; // Asegúrate de que la ruta sea correcta
-import { FaSyncAlt } from 'react-icons/fa'; // Usaremos un ícono de actualización
+import Card from '../../commons/Card'; 
+import { FaSyncAlt } from 'react-icons/fa'; 
 
 const DollarCard: React.FC = () => {
   const [exchangeRate, setExchangeRate] = useState<number | null>(null);
@@ -16,14 +16,14 @@ const DollarCard: React.FC = () => {
       const response = await fetch('https://v6.exchangerate-api.com/v6/eccdf8dbe7556ae434389f5f/latest/USD');
       const data = await response.json();
       if (data.result === 'success') {
-        setExchangeRate(data.conversion_rates.ARS); // Aquí se obtiene el valor en ARS
+        setExchangeRate(data.conversion_rates.ARS); 
 
         const localDate = new Date().toLocaleString();
-        setUpdatedAt(localDate); // Se utiliza la hora local del navegador
+        setUpdatedAt(localDate);
       } else {
         setError('No se pudo obtener la tasa de cambio.');
       }
-    } catch (err) {
+    } catch {
       setError('Error al conectar con el servicio de tasas de cambio.');
     } finally {
       setLoading(false);
