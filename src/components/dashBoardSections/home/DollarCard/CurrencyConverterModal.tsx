@@ -59,7 +59,7 @@ const CurrencyConverterModal: React.FC<CurrencyConverterProps> = ({ exchangeRate
         </div>
       )}
 
-      <button className="btn btn-secondary mt-3" onClick={onClose}>
+      <button className="btn btn-secondary mt-3 mx-2" onClick={onClose}>
         Cerrar
       </button>
     </div>

@@ -18,6 +18,7 @@ const DollarCard: React.FC = () => {
   };
 
   return (
+    <>
     <Card title="Cotización del Dólar" text={loading ? 'Cargando...' : error || `1 USD = ${exchangeRate} ARS`}>
       <div className="mt-1">
         {!loading && !error && (
@@ -38,13 +39,13 @@ const DollarCard: React.FC = () => {
           </button>
         </div>
       </div>
-
-      {showModal && (
+    </Card>
+    {showModal && (
         <Modal onClose={handleModalClose} title="Convertir Moneda">
           <CurrencyConverterModal exchangeRate={exchangeRate!} onClose={handleModalClose} />
         </Modal>
       )}
-    </Card>
+    </>
   );
 };
 

@@ -32,3 +32,51 @@ export const updateExpectedMonthlyIncome = async (userId: string, expectedMonthl
     throw error;  
   }
 };
+
+
+type UpdatePasswordResponse = { 
+  data:{
+  message: string;
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+  };}
+};
+
+export const updatePassword = async (
+  userId: string, 
+  currentPassword: string, 
+  newPassword: string
+): Promise<UpdatePasswordResponse> => {
+  try {
+    const response = await $api.put(`/users/${userId}/change-password`, { 
+      currentPassword, 
+      newPassword 
+    }) as UpdatePasswordResponse;
+    console.log('Respuesta del servidor '+JSON.stringify(response))
+    return response;
+  } catch (error) {
+    console.error('Failed to update password:', error);
+    throw error;  
+  }
+};
+
+type DeleteUserResponse = {
+  message: string;
+  error: number;
+};
+
+export const deleteUser = async (userId: string): Promise<DeleteUserResponse> => {
+  try {
+    const response = await $api.delete(`/users/${userId}`) as DeleteUserResponse;
+
+    return response;
+  } catch (error) {
+    console.error('Failed to delete user:', error);
+    throw error;  
+  }
+};

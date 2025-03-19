@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { login as apiLogin } from "../services/auth";
+import { updatePassword, deleteUser } from "../services/user";
 import { IUser } from "../interfaces/User";
 
 interface AuthContextType {
@@ -9,6 +10,8 @@ interface AuthContextType {
   logout: () => void;
   setToken: (token: string | null) => void;
   setUser: (user: IUser | null) => void;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
+  removeUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -61,24 +64,62 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("authUser");
   };
 
+  const changePassword = async (currentPassword: string, newPassword: string) => {
+    try {
+      if(!user)
+        return
+      const response = await updatePassword(user._id, currentPassword, newPassword);
+      if (response) {
+        setUser(response.data.user);  
+        localStorage.setItem("authUser", JSON.stringify(response.data.user));
+      }
+    } catch (error) {
+      console.error("Error al actualizar la contraseña:", error);
+      throw error;
+    }
+  };
+
+  const removeUser = async () => {
+    try {
+      if(!user)
+        return
+      const response = await deleteUser(user?._id);
+      if (response.error === 0) {
+        logout(); 
+      }
+    } catch (error) {
+      console.error("Error al eliminar el usuario:", error);
+      throw error;
+    }
+  };
+
   const handleUpdateEvent = (event: CustomEvent) => {
     const updatedUser: IUser = event.detail;
     if (updatedUser) {
       setUser(updatedUser);
-      localStorage.setItem("authUser", JSON.stringify(updatedUser)); 
+      localStorage.setItem("authUser", JSON.stringify(updatedUser));
     }
   };
 
   useEffect(() => {
-    window.addEventListener('updateExpectedMonthlyIncome', handleUpdateEvent as EventListener);
+    window.addEventListener("updateExpectedMonthlyIncome", handleUpdateEvent as EventListener);
 
     return () => {
-      window.removeEventListener('updateExpectedMonthlyIncome', handleUpdateEvent as EventListener);
+      window.removeEventListener("updateExpectedMonthlyIncome", handleUpdateEvent as EventListener);
     };
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, setToken, setUser }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      token, 
+      login, 
+      logout, 
+      setToken, 
+      setUser, 
+      changePassword, 
+      removeUser 
+    }}>
       {children}
     </AuthContext.Provider>
   );

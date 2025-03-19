@@ -40,17 +40,19 @@ function Home({ userName }: HomeProps) {
     },
   ];
 
-  return (
+  return (<>
     <div className="col-md-9">
       <Header title="Bienvenido a tu Dashboard" onClick={handleNewSaleClick} />
       <div className="row pt-6 my-6 home-background-animation">
         <UserInfoCard userName={userName} dailySales={dailySales} monthlySales={monthlySales} />
         <DollarCard />
-        <SaleModal onClick={handleNewSaleClick} show={isSaleCardOpen} />
+    
         <Clock />
       </div>
       <Tab tabs={tabs} />
-    </div>
+    </div>   
+     <SaleModal onClick={handleNewSaleClick} show={isSaleCardOpen} />
+    </>
   );
 }
 
