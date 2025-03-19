@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import {InputField, Button} from "../commons/componentsExports";
+import { InputField, Button } from "../commons/componentsExports";
 import { register } from "../../services/auth";
-interface registerFormProps {
+import PasswordValidation from "../commons/PasswordValidation"; 
+
+interface RegisterFormProps {
   onClose: () => void;
 }
 
-const RegisterForm = ({onClose}:registerFormProps) => {
+const RegisterForm = ({ onClose }: RegisterFormProps) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -33,7 +35,7 @@ const RegisterForm = ({onClose}:registerFormProps) => {
         showConfirmButton: false,
         timer: 1500,
       });
-      clearFilds()
+      clearFields();
       setTimeout(() => {
         onClose();
       }, 2000);
@@ -46,18 +48,18 @@ const RegisterForm = ({onClose}:registerFormProps) => {
     }
   };
 
-  const clearFilds = ()=>{
+  const clearFields = () => {
     setName("");
     setEmail("");
     setPassword("");
-    setConfirmPassword("")  
-  }
+    setConfirmPassword("");
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <InputField
         id="registerName"
-        label="Nombre"
+        label="Nombre Apellido"
         type="text"
         placeholder="Ingresa tu nombre"
         value={name}
@@ -72,7 +74,7 @@ const RegisterForm = ({onClose}:registerFormProps) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-      />
+      /> 
       <InputField
         id="registerPassword"
         label="Contraseña"
@@ -91,6 +93,8 @@ const RegisterForm = ({onClose}:registerFormProps) => {
         onChange={(e) => setConfirmPassword(e.target.value)}
         required
       />
+    
+      <PasswordValidation password={password} />
       <Button label="Regístrate" type="submit" />
     </form>
   );
