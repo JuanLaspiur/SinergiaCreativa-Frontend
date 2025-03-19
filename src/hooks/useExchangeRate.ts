@@ -13,7 +13,8 @@ const useExchangeRate = () => {
     setError(null);
 
     try {
-      const response = await fetch('https://v6.exchangerate-api.com/v6/4ff7035d26db2ab8e55ffad2/latest/USD');
+      const keyDolar= import.meta.env.VITE_API_DOLAR_CHANGE ? import.meta.env.VITE_API_DOLAR_CHANGE : '4ff7035d26db2ab8e55ffad2'
+      const response = await fetch(`https://v6.exchangerate-api.com/v6/${keyDolar}/latest/USD`);
       const data = await response.json();
       
       if (data.result === 'success') {
