@@ -6,24 +6,22 @@ function SidebarTitle() {
     <img
       src="/cometa.png"
       alt="Icono"
-      className="m-1"
       style={{
         width: '50px',
         height: '50px',
         objectFit: 'contain',
       }}
-      className="d-none d-md-block"
+      className="m-1 d-none d-md-block"
     />
     <img
       src="/cometa.png"
       alt="Icono"
-      className="m-1"
       style={{
         width: '30px',
         height: '30px',
         objectFit: 'contain',
       }}
-      className="d-block d-md-none"
+      className="m-1 d-block d-md-none"
     />
     <h2 className="text-center mb-0 ms-2">Sinergía</h2>
   </div>
