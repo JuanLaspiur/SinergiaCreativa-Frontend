@@ -28,14 +28,12 @@ Para configurar el entorno, crea un archivo `.env` en la raíz del proyecto con 
 ```
 VITE_API_URL=https://sinergiacreativa-backend.onrender.com
 VITE_APP_NAME=
-VITE_API_KEY=
 VITE_API_DOLAR_CHANGE=
 ```
 VITE_API_URL: URL del backend de la aplicación (asegúrate de que esté configurada correctamente).
 
 VITE_APP_NAME: Nombre de la aplicación.
 
-VITE_API_KEY: Clave de API para el acceso general al sistema.
 
 VITE_API_DOLAR_CHANGE: Clave de API para obtener la tasa de cambio del dólar. Para obtener esta clave, sigue estos pasos:
 
