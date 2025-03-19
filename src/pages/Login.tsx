@@ -44,7 +44,7 @@ const Login: React.FC = () => {
         <div className="card-body p-4">
         <div className="d-flex justify-content-center align-items-center mb-5">
           <img 
-            src="../../public/cometa.png"  
+            src="/cometa.png"  
             alt="Logo" 
             style={{ width: '50px', height: '50px', objectFit: 'contain' }} 
           />

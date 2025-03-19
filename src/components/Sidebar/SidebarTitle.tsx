@@ -4,7 +4,7 @@ function SidebarTitle() {
   return (
     <div className="d-flex align-items-center">
     <img
-      src="../../../public/cometa.png"
+      src="/cometa.png"
       alt="Icono"
       className="m-1"
       style={{
@@ -15,7 +15,7 @@ function SidebarTitle() {
       className="d-none d-md-block"
     />
     <img
-      src="../../../public/cometa.png"
+      src="/cometa.png"
       alt="Icono"
       className="m-1"
       style={{
