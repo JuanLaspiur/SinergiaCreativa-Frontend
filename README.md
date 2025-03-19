@@ -1,5 +1,7 @@
 # Sinergia
-![Logo](./public/cometa.png)
+![Logo](./public/readme/cometa.png)
+
+-
 Sinergia es una aplicación web innovadora y moderna para la gestión de ventas por comisión. Está especialmente diseñada para optimizar el manejo de vendedores, productos y comisiones de manera ágil, eficiente e intuitiva. Con una interfaz atractiva y herramientas prácticas, esta aplicación permite a los equipos de ventas maximizar su rendimiento y obtener información detallada en tiempo real.
 
 ## ¿Por qué elegir Sinergia?
@@ -88,10 +90,8 @@ Si deseas contribuir al proyecto, realiza un fork del repositorio y envía un pu
 
 ¡Gracias por apoyar el desarrollo de Front-Gestión! Juntos podemos mejorar la gestión de ventas por comisión de manera revolucionaria.
 
-### Imagen 1
 
 ![Imagen 1](./public/readme/2.png)
 
-### Imagen 2
 
 ![Imagen 2](./public/readme/3.png)
