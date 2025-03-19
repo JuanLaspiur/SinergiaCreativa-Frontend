@@ -70,7 +70,7 @@ const SalesPlanningCard = ({ userExpected, userId, monthlySales }: SalesPlanning
           <p><strong>Falta para objetivo mensual:</strong> $$ {missingAmount.toFixed(2)}</p>
         ) : ''}
       </div>
-      <button className="btn btn-primary" onClick={handleEditPlanning}>
+      <button className="btn btn-primary animate__animated animate__pulse"  onClick={handleEditPlanning}>
         Editar Expectativa Mensual
       </button>
       

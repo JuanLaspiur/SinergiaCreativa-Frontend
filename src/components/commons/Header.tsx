@@ -31,7 +31,7 @@ const Header: FC<HeaderProps> = ({ title, onClick }) => {
         <h1 className="mb-0">{title}</h1> 
       </div>
       {onClick && (
-        <button className="btn btn-primary" onClick={onClick}>
+        <button className="btn btn-primary animate__animated animate__pulse" onClick={onClick}>
           <FaPlus className="me-2" />
           Nueva venta
         </button>

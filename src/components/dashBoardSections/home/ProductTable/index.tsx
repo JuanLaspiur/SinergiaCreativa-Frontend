@@ -34,7 +34,7 @@ const ProductTable: FC = () => {
             className="btn btn-primary animate__animated animate__pulse"
             onClick={() => handleRowClick(product)}
           >
-            <FaEye />
+            <FaEye  />
           </button>
         </td>
       </>

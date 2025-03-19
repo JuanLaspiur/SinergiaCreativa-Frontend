@@ -42,10 +42,11 @@ const Login: React.FC = () => {
 <div className="d-flex justify-content-center align-items-center vh-100 bg-primary animate__animated animate__fadeIn animate__faster">
       <div className="card shadow-lg" style={{ width: '22rem', borderRadius: '15px' }}>
         <div className="card-body p-4">
-        <div className="d-flex justify-content-center align-items-center mb-5">
+        <div className="d-flex justify-content-center align-items-center mb-5 ">
           <img 
             src="/cometa.png"  
             alt="Logo" 
+             className="animate__animated animate__infinite animate__pulse"
             style={{ width: '50px', height: '50px', objectFit: 'contain' }} 
           />
           <h5 className="m-0 fw-bold">Sinergia</h5>
