@@ -1,5 +1,6 @@
-import React from 'react'
-import { FaBars } from 'react-icons/fa'
+import React from 'react';
+import { FaBars } from 'react-icons/fa';
+import SidebarTitle from './SidebarTitle';
 
 interface SidebarHeaderProps {
   toggleMenu: () => void;
@@ -7,8 +8,7 @@ interface SidebarHeaderProps {
 
 const SidebarHeader: React.FC<SidebarHeaderProps> = ({ toggleMenu }) => (
   <div className="d-flex justify-content-between align-items-center my-2">
-    <h2 className="text-center mb-0">Dashboard</h2>
-
+<SidebarTitle/>
     <button
       className="btn btn-dark d-md-none"
       type="button"
@@ -18,6 +18,6 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({ toggleMenu }) => (
       <FaBars />
     </button>
   </div>
-)
+);
 
-export default SidebarHeader
+export default SidebarHeader;

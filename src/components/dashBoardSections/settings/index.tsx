@@ -1,92 +1,41 @@
 import { Header } from "../../commons/componentsExports";
+import { FaLock, FaTrashAlt } from "react-icons/fa"; 
+import { MdSecurity } from "react-icons/md";
 
 function Settings() {
   return (
     <div className="col-md-9">
       <Header title="Settings" />
-      <div className="row pt-6 mt-6">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-header">
-              <h5 className="card-title">Información del Perfil</h5>
-            </div>
-            <div className="card-body">
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="username" className="form-label">
-                    Nombre de usuario
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="Ingrese su nombre de usuario"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Correo electrónico
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="Ingrese su correo electrónico"
-                  />
-                </div>
-                <div className="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="notifications"
-                  />
-                  <label className="form-check-label" htmlFor="notifications">
-                    Activar notificaciones
-                  </label>
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Guardar Cambios
-                </button>
-              </form>
-            </div>
+      <div className="container mt-4">
+        
+        <div className="card mb-4" style={{ backgroundColor: '#f8f9fa' }}>
+          <div className="card-body">
+            <h4 className="card-title">
+              <MdSecurity className="me-2" /> Seguridad
+            </h4>
+            <p className="card-text">
+              Cambia tu contraseña para mantener tu cuenta segura.
+            </p>
+            <button className="btn btn-primary">
+              <FaLock className="me-2" /> Cambiar Contraseña
+            </button>
           </div>
         </div>
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-header">
-              <h5 className="card-title">Seguridad</h5>
-            </div>
-            <div className="card-body">
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Nueva contraseña
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Ingrese su nueva contraseña"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="confirmPassword" className="form-label">
-                    Confirmar contraseña
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="confirmPassword"
-                    placeholder="Confirme su nueva contraseña"
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Cambiar Contraseña
-                </button>
-              </form>
-            </div>
+
+        <div className="card" style={{ backgroundColor: '#f8f9fa' }}>
+          <div className="card-body">
+            <h4 className="card-title">
+              <FaTrashAlt className="me-2" /> Eliminar Cuenta
+            </h4>
+            <p className="card-text">
+              Ten en cuenta que esta acción es irreversible.
+            </p>
+            <button className="btn btn-danger">
+              <FaTrashAlt className="me-2" /> Eliminar Cuenta
+            </button>
           </div>
         </div>
+
       </div>
     </div>
   );

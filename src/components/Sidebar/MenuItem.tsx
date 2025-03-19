@@ -1,3 +1,4 @@
+//@ts-expect-error
 import React from 'react';
 
 interface MenuItemProps {
@@ -8,7 +9,7 @@ interface MenuItemProps {
 
 const MenuItem: React.FC<MenuItemProps> = ({ name, icon, onClick }) => (
   <li className="nav-item">
-    <a href="#" onClick={onClick} className="nav-link text-white d-flex align-items-center gap-2">
+    <a href="#" onClick={onClick} className="nav-link text-white d-flex align-items-center gap-4">
       {icon} {name}
     </a>
   </li>

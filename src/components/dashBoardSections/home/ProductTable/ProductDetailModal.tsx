@@ -31,12 +31,12 @@ const ProductDetailModal: FC<ProductDetailModalProps> = ({ product, onClose }) =
         <p><strong>Stock:</strong> {product.stock}</p>
         <p><strong>Precio:</strong> $$ {product.price}</p>
         <p>
-          <strong className="text-warning font-weight-bold">
+          <strong className="text-primary font-weight-bold">
             Comisión Actual: $$ {commission}
           </strong>
         </p>
         <p>
-          <strong className="text-warning font-weight-bold">
+          <strong className="text-primary font-weight-bold">
             Tu ganancia: $$ {gain.toFixed(2)} 
           </strong>
         </p>

@@ -1,13 +1,20 @@
-import React from 'react';
-import Card from '../../commons/Card'; 
+import React, { useState } from 'react';
+import Card from '../../../commons/Card'; 
 import { FaSyncAlt } from 'react-icons/fa'; 
-import useExchangeRate from '../../../hooks/useExchangeRate'; 
+import useExchangeRate from '../../../../hooks/useExchangeRate'; 
+import Modal from '../../../commons/Modal';
+import CurrencyConverterModal from './CurrencyConverterModal';
 
 const DollarCard: React.FC = () => {
   const { exchangeRate, loading, error, updatedAt, fetchExchangeRate } = useExchangeRate();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleRefresh = () => {
     fetchExchangeRate();
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
   };
 
   return (
@@ -26,8 +33,17 @@ const DollarCard: React.FC = () => {
           <button className="btn btn-outline-primary" onClick={handleRefresh}>
             <FaSyncAlt className="mr-2" /> Actualizar
           </button>
+          <button className="btn btn-outline-secondary" onClick={() => setShowModal(true)}>
+            Convertir
+          </button>
         </div>
       </div>
+
+      {showModal && (
+        <Modal onClose={handleModalClose} title="Convertir Moneda">
+          <CurrencyConverterModal exchangeRate={exchangeRate!} onClose={handleModalClose} />
+        </Modal>
+      )}
     </Card>
   );
 };

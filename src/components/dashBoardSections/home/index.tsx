@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { FaBoxOpen, FaChartBar } from 'react-icons/fa'; // Ejemplo de íconos
+import { FaBoxOpen, FaChartBar } from 'react-icons/fa'; 
 import { useSales } from '../../../contexts/SaleContext';
 import Header from '../../commons/Header';
 import { DollarCard, SaleModal, UserInfoCard, Clock, ProductTable } from './componentsExports';
 import Tab from '../../commons/Tab';
-import SalesTable from '../profile/SalesTable';
-import './Home.css'; // Asegúrate de agregar esta importación para los estilos CSS
+import SalesTable from './SalesTable';
+import './Home.css';
 
 interface HomeProps {
   userName: string | undefined;

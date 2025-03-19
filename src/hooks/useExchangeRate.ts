@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 const useExchangeRate = () => {
+  const {user} =useAuth()
   const [exchangeRate, setExchangeRate] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -32,7 +34,7 @@ const useExchangeRate = () => {
 
   useEffect(() => {
     fetchExchangeRate();
-  }, []);
+  }, [user?._id]);
 
   return { exchangeRate, loading, error, updatedAt, fetchExchangeRate };
 };

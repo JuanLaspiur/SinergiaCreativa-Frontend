@@ -1,5 +1,5 @@
 .spinner-icon {
-    animation: spin 1s linear infinite; /* Aquí está la animación personalizada */
+    animation: spin 1.5s linear infinite; 
   }
   
   @keyframes spin {

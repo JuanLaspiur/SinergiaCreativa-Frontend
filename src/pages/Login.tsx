@@ -42,6 +42,14 @@ const Login: React.FC = () => {
 <div className="d-flex justify-content-center align-items-center vh-100 bg-primary animate__animated animate__fadeIn animate__faster">
       <div className="card shadow-lg" style={{ width: '22rem', borderRadius: '15px' }}>
         <div className="card-body p-4">
+        <div className="d-flex justify-content-center align-items-center mb-5">
+          <img 
+            src="../../public/cometa.png"  
+            alt="Logo" 
+            style={{ width: '50px', height: '50px', objectFit: 'contain' }} 
+          />
+          <h5 className="m-0 fw-bold">Sinergia</h5>
+        </div>
           <h5 className="card-title text-center mb-4">Iniciar Sesión</h5>
           <LoginForm onSubmit={handleSubmit} isLoading={isLoading} />
           <div className="text-center mt-3">
