@@ -18,6 +18,7 @@ type LoginResponse = {
 export const login = async (email: string, password: string): Promise<LoginResponse> => {
   try {
     const response = await $api.post('/users/login', { email, password }) as LoginResponse;
+    console.log('Response '+JSON.stringify(response))
     return response as LoginResponse;  
   } catch (error) {
     console.error('Login failed:', error);
