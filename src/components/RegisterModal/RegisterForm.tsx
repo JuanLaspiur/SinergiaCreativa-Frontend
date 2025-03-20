@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import { InputField, Button } from "../commons/componentsExports";
+import Button from "../commons/Button";
+import InputField from "../commons/InputField";
 import { register } from "../../services/auth";
-
-interface RegisterFormProps {
+import PasswordValidation from "../commons/PasswordValidation";
+interface registerFormProps {
   onClose: () => void;
 }
+
 const RegisterForm = ({onClose}:registerFormProps) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -91,6 +93,7 @@ const RegisterForm = ({onClose}:registerFormProps) => {
         onChange={(e) => setConfirmPassword(e.target.value)}
         required
       />
+      <PasswordValidation password={password}/>
       <Button label="Regístrate" type="submit" />
     </form>
   );
