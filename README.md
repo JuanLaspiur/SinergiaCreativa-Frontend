@@ -1,4 +1,4 @@
-# Sinergia (Tenia validación de contraseñas fuertes en el register, pero se elimino a último momento por error )
+# Sinergia
 ![Logo](./public/readme/cometa.png)
 
 -
